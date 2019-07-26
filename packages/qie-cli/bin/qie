@@ -1,0 +1,13 @@
+#! /usr/bin/env node
+
+const program = require("commander");
+const { getPkgVersion, printPkgVersion, homedir } = require("../dist/util");
+
+printPkgVersion();
+
+program
+  .version(getPkgVersion())
+  .usage("<command> [options]")
+  .command("init", "Init a cli config with templete")
+  .command("upload", "upload a zip file to OSS with options")
+  .parse(process.argv);
