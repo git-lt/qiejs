@@ -16,7 +16,7 @@ const resolve = function(relativePath) {
 };
 
 module.exports = (config: IQieConfig) => {
-  const { type, publishApi, env, upload: uploadConfig } = config;
+  const { type, publishApi, env, upload: uploadConfig, cdnBaseUrl } = config;
 
   const fileName = getFirstFileName(uploadConfig.dir);
   const regDomain = /([a-z0-9][a-z0-9\-]*?\.(?:com|cn|net|org|gov|info|la|cc|co)(?:\.(?:cn|jp))?)$/;
@@ -50,6 +50,7 @@ module.exports = (config: IQieConfig) => {
       cdnPrefix: prefix,
       zipName: fileName,
       type: type.toLowerCase(),
+      cdnBaseUrl,
       desc,
       envName,
       version

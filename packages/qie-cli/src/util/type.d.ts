@@ -9,5 +9,6 @@ export interface IQieConfig {
   type: "SPA" | "MPA";
   publishApi: string;
   env: IEnvConfig[];
+  cdnBaseUrl: string;
   upload: IAliossConfig;
 }
