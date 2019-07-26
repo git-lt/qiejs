@@ -1,5 +1,4 @@
 import * as path from "path";
-// import aliOss from "meetyou-ali-oss";
 import AliossUpload from "./util/AliossUpload";
 import { CONFIG_FILE_NAME } from "./util/constants";
 import { checkConfigProp, isDirEmpty } from "./util";

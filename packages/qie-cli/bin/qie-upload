@@ -5,7 +5,6 @@ const { existsQieConfigFile } = require("../dist/util");
 const upload = require("../dist/upload").default;
 
 // -r 记录到数据库
-// -z [目录名] 上传压缩包
 // -d [目录名] 上传目录
 // -p [OSS前缀]
 
