@@ -56,7 +56,7 @@ module.exports = (config: IQieConfig) => {
       version
     };
 
-    console.log(JSON.stringify(params));
+    console.log(JSON.stringify(params, null, 2));
     console.log();
     const spinner = ora(`正在提交版本至 ${envName}`).start();
     axios
@@ -66,7 +66,7 @@ module.exports = (config: IQieConfig) => {
         if (res.success) {
           console.log();
           spinner.color = "green";
-          spinner.succeed(chalk.green(`提交成功：${JSON.stringify(res.data)}`));
+          spinner.succeed(chalk.green(`提交成功 🎉`));
           console.log();
         } else {
           throw res;

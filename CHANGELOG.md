@@ -1,5 +1,10 @@
 <a name="1.0.0"></a>
-# [1.0.0](https://github.com/git-lt/qiejs/compare/v0.0.11...v1.0.0) (2019-07-29)
+# [1.0.0](https://github.com/git-lt/qiejs/compare/v0.0.12...v1.0.0) (2019-07-29)
+
+
+
+<a name="0.0.12"></a>
+## [0.0.12](https://github.com/git-lt/qiejs/compare/v0.0.11...v0.0.12) (2019-07-29)
 
 
 
