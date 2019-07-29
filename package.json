@@ -60,7 +60,6 @@
     "lerna": "^2.11.0",
     "docusaurus": "^2.0.0-alpha.23",
     "npm-run-all": "^4.1.2",
-    "ora": "^2.1.0",
     "rimraf": "^2.6.2",
     "shelljs": "^0.8.1",
     "typescript": "^3.0.1"
