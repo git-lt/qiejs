@@ -2,12 +2,52 @@
 
 const program = require("commander");
 const { getPkgVersion, printPkgVersion, homedir } = require("../dist/util");
+const { existsQieConfigFile } = require("../dist/util");
 
 printPkgVersion();
 
+// program
+//   .version(getPkgVersion())
+//   .usage("<command> [options]")
+//   .command("init [projectName]", "Init a project with default templete")
+//   .command("config <cmd>", "Taro config")
+//   .command("create [type]", "Create page or component for project")
+//   .command("build", "Build a project with options")
+//   .command("update", "Update packages of taro")
+//   .command("convert", "Convert weapp to taro")
+//   .command("info", "Diagnostics Taro env info")
+//   .command("doctor", "Diagnose taro project")
+//   .parse(process.argv);
+
+program.version(getPkgVersion()).usage("<command> [options]");
+
 program
-  .version(getPkgVersion())
-  .usage("<command> [options]")
-  .command("init", "Init a cli config with templete")
-  .command("upload", "upload a zip file to OSS with options")
-  .parse(process.argv);
+  .command("init")
+  .description("init a cli config with templete")
+  .action(options => {
+    require("../dist/initConfig").default(options);
+  });
+
+program
+  .command("upload")
+  .description("upload a zip file to OSS")
+  .option("-r --record", "record version info to DB (only have pms -z)")
+  .option(
+    "-d --dir [dirName]",
+    "upload directory to OSS, dirName default value is zip"
+  )
+  .action(options => {
+    const { record, dir, prefix } = options;
+    const pms = { record, dir, prefix };
+    // 检查配置文件是否存在
+    existsQieConfigFile();
+    // 上传
+    require("../dist/upload").default(pms);
+  });
+
+program.parse(process.argv);
+
+// 不带任何参数里，打印 帮助
+if (!process.argv.slice(2).length) {
+  program.outputHelp();
+}

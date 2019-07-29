@@ -26,7 +26,7 @@ const siteConfig = {
   tagline:
     "SPA、MPA 前端项目部署工具，支持 Nginx、OSS CDN 两种部署方式，支持构建不同环境压缩包，同步备份至OSS，并记录版本信息至数据库。",
   url: "https://taro.jd.com" /* your website url */,
-  baseUrl: "/qie/" /* base url for your project */,
+  baseUrl: "/qiejs/" /* base url for your project */,
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
@@ -53,7 +53,7 @@ const siteConfig = {
 
   algolia: {
     apiKey: "57b9948bff42bc0dbc6c219556fbae35",
-    indexName: "taro"
+    indexName: "qie"
   },
 
   // If you have users set above, you add it here:
