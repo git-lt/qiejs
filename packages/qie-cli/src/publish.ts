@@ -3,7 +3,7 @@ import axios from "axios";
 import * as path from "path";
 import * as inquirer from "inquirer";
 import chalk from "chalk";
-import { getFirstFileName } from "./util";
+import { getFirstFileName, getSystemUsername } from "./util";
 import { CONFIG_FILE_NAME } from "./util/constants";
 import logger from "./util/logger";
 import { IQieConfig } from "./util/type";
@@ -53,7 +53,8 @@ module.exports = (config: IQieConfig) => {
       cdnBaseUrl,
       desc,
       envName,
-      version
+      version,
+      userName: getSystemUsername()
     };
 
     console.log(JSON.stringify(params, null, 2));
