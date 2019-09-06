@@ -1,0 +1,27 @@
+{
+  "name": "qie-utils",
+  "version": "0.0.16",
+  "description": "qie-utils for qie projects",
+  "main": "lib/index.js",
+  "types": "types/index.d.ts",
+  "files": [
+    "lib",
+    "types"
+  ],
+  "scripts": {
+    "tsc": "tsc",
+    "update-index": "node scripts/update-index.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/git-lt/qiejs.git"
+  },
+  "keywords": [
+    "utils"
+  ],
+  "author": "LIUTAO <hz_liutao@qq.com>",
+  "license": "MIT"
+}

@@ -1,0 +1,29 @@
+{
+  "name": "qie-lstore",
+  "version": "0.0.16",
+  "description": "qie-lstore for localstorage",
+  "main": "lib/index.js",
+  "types": "types/index.d.ts",
+  "files": [
+    "lib",
+    "types"
+  ],
+  "scripts": {
+    "tsc": "tsc -w"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/git-lt/qiejs.git"
+  },
+  "keywords": [
+    "utils"
+  ],
+  "author": "LIUTAO <hz_liutao@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/store": "^2.0.2"
+  }
+}
