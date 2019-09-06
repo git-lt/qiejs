@@ -3,6 +3,7 @@ import { IAliossConfig } from "./AliossUpload";
 interface IEnvConfig {
   name: string;
   key: string;
+  pubApi: string;
 }
 
 export interface IQieConfig {

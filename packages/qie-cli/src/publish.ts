@@ -16,7 +16,7 @@ const resolve = function(relativePath) {
 };
 
 module.exports = (config: IQieConfig) => {
-  const { type, publishApi, env, upload: uploadConfig, cdnBaseUrl } = config;
+  const { type, env, upload: uploadConfig, cdnBaseUrl } = config;
 
   const fileName = getFirstFileName(uploadConfig.dir);
   const regDomain = /([a-z0-9][a-z0-9\-]*?\.(?:com|cn|net|org|gov|info|la|cc|co)(?:\.(?:cn|jp))?)$/;
@@ -28,21 +28,18 @@ module.exports = (config: IQieConfig) => {
   if (!Array.isArray(env) || !env.length) {
     logger.fatal(`${CONFIG_FILE_NAME} 缺少环境配置`);
   }
-  if (!publishApi) {
-    logger.fatal(`${CONFIG_FILE_NAME} 缺少 发布API 配置`);
-  }
 
   const envInfo = env.filter(v => v.name === envName)[0];
-  if (!envInfo) {
+  if (!envInfo || !envInfo.key || !envInfo.pubApi) {
     logger.fatal(`${CONFIG_FILE_NAME} 缺少 ${envName} 环境配置`);
   }
 
   const version = require(resolve("package.json")).version;
-  const key = envInfo.key || "";
   const prefix = uploadConfig.prefix;
   const prompts = [
     { name: "desc", type: "input", message: `[${envName}] - 请输入版本说明:  ` }
   ];
+  const { key, pubApi } = envInfo;
 
   inquirer.prompt(prompts).then(({ desc }) => {
     const params = {
@@ -61,7 +58,7 @@ module.exports = (config: IQieConfig) => {
     console.log();
     const spinner = ora(`正在提交版本至 ${envName}`).start();
     axios
-      .post(publishApi, params)
+      .post(pubApi, params)
       .then(res => res.data)
       .then(res => {
         if (res.success) {

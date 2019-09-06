@@ -1,0 +1,13 @@
+export declare const isObject: (obj: any) => boolean;
+export declare const isFunction: (x: any) => boolean;
+export declare const isString: (x: any) => boolean;
+export declare const isBoolean: (x: any) => boolean;
+export declare const isPlainObject: (x: string) => boolean;
+export declare const isUndefined: (x: any) => boolean;
+export declare const isArray: (x: string) => boolean;
+export declare const isNull: (x: any) => boolean;
+export declare const isNullOrUndefined: (x: any) => boolean;
+export declare function deepClone(obj: any): any;
+export declare function deepMerge(object: any, ...sources: any[]): any;
+export declare function deepGet(obj: any, pathName: string): any;
+export declare function deepSet(obj: any, pathName: string, value: any): boolean;
