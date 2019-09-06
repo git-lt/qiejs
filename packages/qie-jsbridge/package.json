@@ -1,6 +1,6 @@
 {
   "name": "qie-jsbridge",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "qie-jsbridge for qie webview",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
@@ -9,7 +9,8 @@
     "types"
   ],
   "scripts": {
-    "tsc": "tsc -w"
+    "dev": "tsc -w",
+    "build": "tsc"
   },
   "publishConfig": {
     "access": "public"

@@ -1,6 +1,6 @@
 {
   "name": "qie-ajax",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "qie-ajax for axios",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
@@ -9,7 +9,8 @@
     "types"
   ],
   "scripts": {
-    "tsc": "tsc -w"
+    "tsc": "tsc -w",
+    "build": "tsc"
   },
   "dependencies": {
     "qs": "^6.8.0"

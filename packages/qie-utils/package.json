@@ -1,6 +1,6 @@
 {
   "name": "qie-utils",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "qie-utils for qie projects",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
@@ -9,7 +9,8 @@
     "types"
   ],
   "scripts": {
-    "tsc": "tsc",
+    "build": "tsc",
+    "dev": "tsc -w",
     "update-index": "node scripts/update-index.js"
   },
   "publishConfig": {
