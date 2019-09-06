@@ -19,7 +19,11 @@ class Footer extends React.Component {
             <div className="footer_link">
               <h3 className="footer_link_tit footer_link_tit1">相关资源</h3>
               <p>
-                <a className="link" href="https://taro.jd.com/" target="_blank">
+                <a
+                  className="link"
+                  href="https://github.com/git-lt/qiejs"
+                  target="_blank"
+                >
                   Qie
                 </a>
               </p>
@@ -35,7 +39,7 @@ class Footer extends React.Component {
             <div className="footer_link">
               <h3 className="footer_link_tit footer_link_tit3">关于我们</h3>
               <p>
-                <a href="https://aotu.io/join/" target="_blank">
+                <a href="https://github.com/git-lt/qiejs" target="_blank">
                   加入我们
                 </a>
               </p>
@@ -43,7 +47,7 @@ class Footer extends React.Component {
             <div className="footer_link">
               <h3 className="footer_link_tit footer_link_tit4">感谢</h3>
               <p>
-                <a href="http://jdc.jd.com/" target="_blank">
+                <a href="https://github.com/git-lt/qiejs" target="_blank">
                   用户体验设计部
                 </a>
               </p>

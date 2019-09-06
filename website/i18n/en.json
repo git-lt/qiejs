@@ -5,8 +5,17 @@
     "previous": "Previous",
     "tagline": "SPA、MPA 前端项目部署工具，支持 Nginx、OSS CDN 两种部署方式，支持构建不同环境压缩包，同步备份至OSS，并记录版本信息至数据库。",
     "docs": {
+      "AJAX": {
+        "title": "对异步请求的封装"
+      },
       "GETTING-STARTED": {
         "title": "安装及使用"
+      },
+      "JSBRIDGE": {
+        "title": "与Native交互"
+      },
+      "LOCALSTORAGE": {
+        "title": "对本地存储的封装"
       },
       "README": {
         "title": "QIE 介绍"
@@ -17,7 +26,10 @@
     },
     "categories": {
       "关于Qie": "关于Qie",
-      "快速开始": "快速开始"
+      "快速开始": "快速开始",
+      "本地存储": "本地存储",
+      "与Native交互": "与Native交互",
+      "异步请求": "异步请求"
     }
   },
   "pages-strings": {
