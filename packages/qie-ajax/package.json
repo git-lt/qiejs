@@ -1,7 +1,7 @@
 {
-  "name": "qie-ajax",
-  "version": "0.0.17",
-  "description": "qie-ajax for axios",
+  "name": "@qiejs/ajax",
+  "version": "0.0.18",
+  "description": "ajax for axios",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "files": [

@@ -1,7 +1,7 @@
 {
-  "name": "qie-lstore",
-  "version": "0.0.17",
-  "description": "qie-lstore for localstorage",
+  "name": "@qiejs/lstore",
+  "version": "0.0.18",
+  "description": "lstore for localstorage",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "files": [
