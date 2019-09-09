@@ -1,7 +1,7 @@
 {
-  "name": "@qiejs/lstore",
+  "name": "@qiejs/jsbridge",
   "version": "0.0.21",
-  "description": "lstore for localstorage",
+  "description": "jsbridge for qie webview",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "files": [
@@ -24,7 +24,7 @@
   ],
   "author": "LIUTAO <hz_liutao@qq.com>",
   "license": "MIT",
-  "devDependencies": {
-    "@types/store": "^2.0.2"
+  "dependencies": {
+    "detector": "^2.5.0"
   }
 }
