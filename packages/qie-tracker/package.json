@@ -1,7 +1,7 @@
 {
-  "name": "@qiejs/jsbridge",
-  "version": "0.0.21",
-  "description": "jsbridge for qie webview",
+  "name": "@qiejs/tracker",
+  "version": "0.0.22",
+  "description": "tracker for business is buried point",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "files": [
