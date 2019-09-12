@@ -61,6 +61,7 @@
               }
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/nervjs/taro/edit/master/docs/JSBRIDGE.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">与Native交互</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="与-native-交互"></a><a href="#与-native-交互" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>与 Native 交互</h2>
+<h3><a class="anchor" aria-hidden="true" id="使用"></a><a href="#使用" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用</h3>
 <pre><code class="hljs css language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> bridge <span class="token keyword">from</span> <span class="token string">"@qiejs/jsbridge"</span><span class="token punctuation">;</span>
 
 <span class="token comment">// 获取Native用户登录后的数据</span>
@@ -71,7 +72,39 @@ bridge<span class="token punctuation">.</span><span class="token function">getUs
 <span class="token comment">// 通知Native更新用户信息</span>
 bridge<span class="token punctuation">.</span><span class="token function">updateUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/qiejs/docs/LOCALSTORAGE.html"><span class="arrow-prev">← </span><span>对本地存储的封装</span></a><a class="docs-next button" href="/qiejs/docs/AJAX.html"><span>对异步请求的封装</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#与-native-交互">与 Native 交互</a></li></ul></nav></div><footer class="footer" id="footer"><div class="grid_c1 footer_cont"><div class="footer_logo_container"></div><div class="footer_link_container"><div class="footer_link"><h3 class="footer_link_tit footer_link_tit1">相关资源</h3><p><a class="link" href="https://github.com/git-lt/qiejs" target="_blank">Qie</a></p></div><div class="footer_link"><h3 class="footer_link_tit footer_link_tit2">社区</h3><p><a href="https://github.com/NervJS/taro/issues" target="_blank">GitHub</a></p></div><div class="footer_link"><h3 class="footer_link_tit footer_link_tit3">关于我们</h3><p><a href="https://github.com/git-lt/qiejs" target="_blank">加入我们</a></p></div><div class="footer_link"><h3 class="footer_link_tit footer_link_tit4">感谢</h3><p><a href="https://github.com/git-lt/qiejs" target="_blank">用户体验设计部</a></p></div></div></div><div class="copyright"><div class="in">Copyright © 2019. All Rights Reserved.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+<h3><a class="anchor" aria-hidden="true" id="api"></a><a href="#api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>API</h3>
+<pre><code class="hljs css language-js"><span class="token comment">// 初始回调</span>
+onReady<span class="token punctuation">;</span>
+<span class="token comment">// 获取登录信息</span>
+getUserInfo<span class="token punctuation">;</span>
+<span class="token comment">// 跳转到某页面</span>
+routerTo<span class="token punctuation">;</span>
+<span class="token comment">// 跳转到H5页面</span>
+routerToH5<span class="token punctuation">;</span>
+<span class="token comment">// 到登录</span>
+login<span class="token punctuation">;</span>
+<span class="token comment">// 更新用户信息</span>
+updateUser<span class="token punctuation">;</span>
+<span class="token comment">// 回首页</span>
+goHome<span class="token punctuation">;</span>
+<span class="token comment">// 返回</span>
+goBack<span class="token punctuation">;</span>
+<span class="token comment">// 设置导航栏右侧内容</span>
+setNavRight<span class="token punctuation">;</span>
+<span class="token comment">// 微信分享</span>
+wxShare<span class="token punctuation">;</span>
+<span class="token comment">// 海报图片分享</span>
+wxShareImg<span class="token punctuation">;</span>
+<span class="token comment">// 预览文件</span>
+privewFiles<span class="token punctuation">;</span>
+<span class="token comment">// appleIAP</span>
+appleIAP<span class="token punctuation">;</span>
+<span class="token comment">// 注册JS回调</span>
+registerMethod<span class="token punctuation">;</span>
+<span class="token comment">// 安卓端获取图片</span>
+getImage<span class="token punctuation">;</span>
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/qiejs/docs/LOCALSTORAGE.html"><span class="arrow-prev">← </span><span>对本地存储的封装</span></a><a class="docs-next button" href="/qiejs/docs/AJAX.html"><span>对异步请求的封装</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#与-native-交互">与 Native 交互</a><ul class="toc-headings"><li><a href="#使用">使用</a></li><li><a href="#api">API</a></li></ul></li></ul></nav></div><footer class="footer" id="footer"><div class="grid_c1 footer_cont"><div class="footer_logo_container"></div><div class="footer_link_container"><div class="footer_link"><h3 class="footer_link_tit footer_link_tit1">相关资源</h3><p><a class="link" href="https://github.com/git-lt/qiejs" target="_blank">Qie</a></p></div><div class="footer_link"><h3 class="footer_link_tit footer_link_tit2">社区</h3><p><a href="https://github.com/NervJS/taro/issues" target="_blank">GitHub</a></p></div><div class="footer_link"><h3 class="footer_link_tit footer_link_tit3">关于我们</h3><p><a href="https://github.com/git-lt/qiejs" target="_blank">加入我们</a></p></div><div class="footer_link"><h3 class="footer_link_tit footer_link_tit4">感谢</h3><p><a href="https://github.com/git-lt/qiejs" target="_blank">用户体验设计部</a></p></div></div></div><div class="copyright"><div class="in">Copyright © 2019. All Rights Reserved.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
