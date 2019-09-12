@@ -1,6 +1,6 @@
 {
   "name": "@qiejs/utils",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "utils for qie projects",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
@@ -9,7 +9,7 @@
     "types"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "npm run update-index && tsc",
     "dev": "tsc -w",
     "update-index": "node scripts/update-index.js"
   },
@@ -24,5 +24,13 @@
     "utils"
   ],
   "author": "LIUTAO <hz_liutao@qq.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "numeral": "^2.0.6",
+    "url-parse": "^1.4.7"
+  },
+  "devDependencies": {
+    "@types/numeral": "^0.0.26",
+    "@types/url-parse": "^1.4.3"
+  }
 }
