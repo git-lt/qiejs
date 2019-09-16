@@ -1,6 +1,6 @@
 {
   "name": "@qiejs/lstore",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "lstore for localstorage",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
