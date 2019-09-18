@@ -24,7 +24,7 @@ exports.regMap = {
     // url地址
     url: /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i
 };
-const rules = {
+var rules = {
     phone: { pattern: exports.regMap.phone, message: "请输入正确的手机号码" },
     price: { pattern: exports.regMap.price, message: "请输入最多两位小数的金额" },
     idCard: { pattern: exports.regMap.idCard, message: "身份证格式不正确" },

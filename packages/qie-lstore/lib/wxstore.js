@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const util_1 = require("./util");
-class Store {
-    set(key, val) {
+var util_1 = require("./util");
+var Store = /** @class */ (function () {
+    function Store() {
+    }
+    Store.prototype.set = function (key, val) {
         if (util_1.isUndefined(val)) {
             wx.removeStorageSync(key);
         }
@@ -10,18 +12,19 @@ class Store {
             wx.setStorageSync(key, val);
         }
         return this;
-    }
-    get(key) {
+    };
+    Store.prototype.get = function (key) {
         return wx.getStorageSync(key);
-    }
-    clear() {
+    };
+    Store.prototype.clear = function () {
         wx.clearStorageSync();
         return this;
-    }
-    remove(key) {
-        const v = wx.getStorageSync(key);
+    };
+    Store.prototype.remove = function (key) {
+        var v = wx.getStorageSync(key);
         wx.removeStorageSync(key);
         return v;
-    }
-}
+    };
+    return Store;
+}());
 exports.default = Store;

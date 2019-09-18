@@ -11,6 +11,8 @@ export interface IAjax {
   catch?: (err: any) => void;
   dataType?: RequestDataType;
   loading?: ILoadingProps;
+  // 延迟多少ms 显示Loading
+  loadingDelay?: number;
   axios: any;
 }
 
@@ -40,13 +42,17 @@ export class Request {
   dataType: "json" | "default" | "form-data";
   loading: ILoadingProps | undefined;
   axios: any;
+  cancelSource: any;
+  loadingDelay: number;
 
   constructor(options: IAjax) {
-    const { dataType = "json", loading, axios } = options;
+    const { dataType = "json", loading, axios, loadingDelay } = options;
     this.dataType = dataType;
     this.loading = loading;
     this.catch = options.catch;
     this.axios = axios;
+    this.cancelSource = axios.CancelToken.source();
+    this.loadingDelay = loadingDelay || 300;
   }
 
   // 注册 api
@@ -92,21 +98,33 @@ export class Request {
         data = qs.stringify(data, { allowDots: true });
       }
 
-      // 设置 loading 状态
-      this._changeLoading(loading, true);
-
-      // 返回 Promise 请求类型结果
-      return this.axios({
+      const requestPromise = this.axios({
         url,
         method,
         params,
         data: IS_GET ? {} : data,
+        paramsSerializer: (params: any) => {
+          return qs.stringify(params, { indices: false });
+        },
         headers: {
           ...this.axios.defaults.headers,
           ...REQUEST_HEADERS[dataType]
         },
+        cancelToken: this.cancelSource.token,
         ...others
-      })
+      });
+
+      const showLoadingPromise = new Promise(resolve =>
+        setTimeout(() => resolve(this.loadingDelay), this.loadingDelay)
+      );
+
+      // 如果请求超过 260ms 则显示loading
+      Promise.race([requestPromise, showLoadingPromise]).then(delay => {
+        delay === this.loadingDelay && this._changeLoading(loading, true);
+      });
+
+      // 返回 promise
+      return requestPromise
         .then((data: any) => {
           this._changeLoading(loading, false);
           return data;

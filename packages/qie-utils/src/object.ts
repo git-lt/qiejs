@@ -20,6 +20,14 @@ export const isArray = isObjectOfType("Array");
 export const isNull = (x: any) => x === null;
 export const isNullOrUndefined = (x: any) => isUndefined(x) || isNull(x);
 
+export const isEmpty = (value: any) => {
+  if (value === void 0 || value === null) return true;
+  if (isObject(value)) return !Object.keys(value).length;
+  if (isArray(value)) return !value.length;
+  if (isString(value)) return !value;
+  return value.toString().length == 0;
+};
+
 export function deepClone(obj: any): any {
   if (obj === undefined || obj === null || typeof obj !== "object") {
     return obj;

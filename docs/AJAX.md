@@ -48,7 +48,7 @@ axios.interceptors.response.use(
   }
 );
 
-const createAjax = new Ajax({
+const createAjax = Ajax({
   axios: axios,
   // post请求的数据类型
   dataType: "json",
@@ -81,7 +81,7 @@ const apis = {
   getUser: id => `get /user/${id}`
 };
 
-export default createAjax(apis, "/api");
+export default createAjax.regist(apis, "/api");
 ```
 
 ### 使用
@@ -106,3 +106,20 @@ api.getUser(userId)({
   console.log(err)
 })
 ```
+
+### API
+
+Ajax(options)
+
+- `options.catch`: 自定义的全局异常处理
+- `options.dataType`: 请求的数据类型，默认为 `json`
+- `options.loading`: 自定义的全局 `loading` 对象， `{ show: Function, hide: Function }`
+- `options.axios`: 引入的 axios 对象
+- `options.loadingDelay`: 延迟多少毫秒显示 loading，默认 300ms, 如果 300ms 内返回请求结果，则不显示 loading
+
+api.xxx(options)
+
+- `options.data`: 请求的数据对象
+- `options.loading`: Boolean 是否显示 `loading`，默认 false, 为函数时，为自定义的 Loading 处理函数
+- `options.catchError`: 是否全局捕获异常，默认全局捕获
+- `options.dataType`: 请求的数据类型，默认为 `Ajax` 初始化的 `dataType`

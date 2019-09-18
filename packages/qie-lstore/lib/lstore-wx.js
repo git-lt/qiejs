@@ -3,28 +3,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const wxstore_1 = __importDefault(require("./wxstore"));
-const store = new wxstore_1.default();
-class LStore {
-    constructor(prefix) {
-        this.init = (keys) => {
-            const props = Object.keys(keys).reduce((pre, key) => {
-                const keyName = `${this.prefix}${key}`;
+var wxstore_1 = __importDefault(require("./wxstore"));
+var store = new wxstore_1.default();
+var LStore = /** @class */ (function () {
+    function LStore(prefix) {
+        var _this = this;
+        this.init = function (keys) {
+            var props = Object.keys(keys).reduce(function (pre, key) {
+                var keyName = "" + _this.prefix + key;
                 pre[key] = {
                     enumerable: true,
-                    get() {
+                    get: function () {
                         return store.get(keyName);
                     },
-                    set(value) {
+                    set: function (value) {
                         return store.set(keyName, value);
                     }
                 };
                 return pre;
             }, {});
-            this.lstore = Object.defineProperties({}, props);
-            return this.lstore;
+            _this.lstore = Object.defineProperties({}, props);
+            return _this.lstore;
         };
         this.prefix = prefix;
     }
-}
+    return LStore;
+}());
 exports.default = LStore;

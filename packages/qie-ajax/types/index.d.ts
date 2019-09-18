@@ -7,6 +7,7 @@ export interface IAjax {
     catch?: (err: any) => void;
     dataType?: RequestDataType;
     loading?: ILoadingProps;
+    loadingDelay?: number;
     axios: any;
 }
 export interface IRequestConfig {
@@ -22,6 +23,8 @@ export declare class Request {
     dataType: "json" | "default" | "form-data";
     loading: ILoadingProps | undefined;
     axios: any;
+    cancelSource: any;
+    loadingDelay: number;
     constructor(options: IAjax);
     regist(apis: Record<string, string | Function>, servicePrefix?: string): Record<string, TimerHandler>;
     _transfromToRequest(methodUrl: string, servicePrefix?: string): (config: Partial<IRequestConfig>) => any;

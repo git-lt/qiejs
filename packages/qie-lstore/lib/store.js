@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const util_1 = require("./util");
-class Store {
-    constructor() {
+var util_1 = require("./util");
+var Store = /** @class */ (function () {
+    function Store() {
         this.storage = util_1.dealIncognito();
     }
-    set(key, val) {
+    Store.prototype.set = function (key, val) {
         if (util_1.isUndefined(val)) {
             this.remove(key);
         }
@@ -13,19 +13,20 @@ class Store {
             this.storage.setItem(key, util_1.serialize(val));
         }
         return this;
-    }
-    get(key) {
-        const v = this.storage.getItem(key);
+    };
+    Store.prototype.get = function (key) {
+        var v = this.storage.getItem(key);
         return util_1.deserialize(v);
-    }
-    clear() {
+    };
+    Store.prototype.clear = function () {
         this.storage.clear();
         return this;
-    }
-    remove(key) {
-        const v = this.get(key);
+    };
+    Store.prototype.remove = function (key) {
+        var v = this.get(key);
         this.storage.removeItem(key);
         return v;
-    }
-}
+    };
+    return Store;
+}());
 exports.default = Store;
