@@ -1,4 +1,10 @@
 import qs from "qs";
+import {
+  AxiosRequestConfig,
+  Method,
+  CancelTokenSource,
+  AxiosStatic
+} from "axios";
 
 export interface ILoadingProps {
   show: Function;
@@ -13,7 +19,7 @@ export interface IAjax {
   loading?: ILoadingProps;
   // 延迟多少ms 显示Loading
   loadingDelay?: number;
-  axios: any;
+  axios: AxiosStatic;
 }
 
 export interface IRequestConfig {
@@ -41,8 +47,8 @@ export class Request {
   catch?: (err: any) => void;
   dataType: "json" | "default" | "form-data";
   loading: ILoadingProps | undefined;
-  axios: any;
-  cancelSource: any;
+  axios: AxiosStatic;
+  cancelSource: CancelTokenSource;
   loadingDelay: number;
 
   constructor(options: IAjax) {
@@ -84,9 +90,9 @@ export class Request {
       } = config || {};
 
       // 获取 方法 和 地址
-      let [method, url] = methodUrl.split(" ");
-      url = servicePrefix + url;
-      method = method.toLowerCase();
+      const pathInfo = methodUrl.split(" ");
+      const url = servicePrefix + pathInfo[1];
+      const method = pathInfo[0].toLowerCase() as Method;
 
       // 处理 get 请求参数
       const IS_GET = method === "get";
@@ -98,7 +104,7 @@ export class Request {
         data = qs.stringify(data, { allowDots: true });
       }
 
-      const requestPromise = this.axios({
+      const reqConfig: AxiosRequestConfig = {
         url,
         method,
         params,
@@ -112,7 +118,9 @@ export class Request {
         },
         cancelToken: this.cancelSource.token,
         ...others
-      });
+      };
+
+      const requestPromise = this.axios(reqConfig);
 
       const showLoadingPromise = new Promise(resolve =>
         setTimeout(() => resolve(this.loadingDelay), this.loadingDelay)

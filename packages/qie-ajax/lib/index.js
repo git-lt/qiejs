@@ -70,9 +70,9 @@ var Request = /** @class */ (function () {
         return function (config) {
             var _a = config || {}, _b = _a.data, data = _b === void 0 ? {} : _b, _c = _a.dataType, dataType = _c === void 0 ? _this.dataType : _c, _d = _a.catchError, catchError = _d === void 0 ? true : _d, _e = _a.headers, headers = _e === void 0 ? {} : _e, _f = _a.loading, loading = _f === void 0 ? false : _f, others = __rest(_a, ["data", "dataType", "catchError", "headers", "loading"]);
             // 获取 方法 和 地址
-            var _g = methodUrl.split(" "), method = _g[0], url = _g[1];
-            url = servicePrefix + url;
-            method = method.toLowerCase();
+            var pathInfo = methodUrl.split(" ");
+            var url = servicePrefix + pathInfo[1];
+            var method = pathInfo[0].toLowerCase();
             // 处理 get 请求参数
             var IS_GET = method === "get";
             var params = {};
@@ -82,11 +82,12 @@ var Request = /** @class */ (function () {
             if (dataType === "default") {
                 data = qs_1.default.stringify(data, { allowDots: true });
             }
-            var requestPromise = _this.axios(__assign({ url: url,
+            var reqConfig = __assign({ url: url,
                 method: method,
                 params: params, data: IS_GET ? {} : data, paramsSerializer: function (params) {
                     return qs_1.default.stringify(params, { indices: false });
-                }, headers: __assign({}, _this.axios.defaults.headers, REQUEST_HEADERS[dataType]), cancelToken: _this.cancelSource.token }, others));
+                }, headers: __assign({}, _this.axios.defaults.headers, REQUEST_HEADERS[dataType]), cancelToken: _this.cancelSource.token }, others);
+            var requestPromise = _this.axios(reqConfig);
             var showLoadingPromise = new Promise(function (resolve) {
                 return setTimeout(function () { return resolve(_this.loadingDelay); }, _this.loadingDelay);
             });

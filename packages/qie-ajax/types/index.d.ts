@@ -1,3 +1,4 @@
+import { CancelTokenSource, AxiosStatic } from "axios";
 export interface ILoadingProps {
     show: Function;
     hide: Function;
@@ -8,7 +9,7 @@ export interface IAjax {
     dataType?: RequestDataType;
     loading?: ILoadingProps;
     loadingDelay?: number;
-    axios: any;
+    axios: AxiosStatic;
 }
 export interface IRequestConfig {
     data: any;
@@ -22,12 +23,12 @@ export declare class Request {
     catch?: (err: any) => void;
     dataType: "json" | "default" | "form-data";
     loading: ILoadingProps | undefined;
-    axios: any;
-    cancelSource: any;
+    axios: AxiosStatic;
+    cancelSource: CancelTokenSource;
     loadingDelay: number;
     constructor(options: IAjax);
     regist(apis: Record<string, string | Function>, servicePrefix?: string): Record<string, TimerHandler>;
-    _transfromToRequest(methodUrl: string, servicePrefix?: string): (config: Partial<IRequestConfig>) => any;
+    _transfromToRequest(methodUrl: string, servicePrefix?: string): (config: Partial<IRequestConfig>) => Promise<any>;
     _changeLoading(loading: boolean | Function, state: boolean): void;
 }
 declare const _default: (options: IAjax) => Request;
