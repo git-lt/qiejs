@@ -1,6 +1,6 @@
 {
   "name": "@qiejs/utils",
-  "version": "0.0.33-0",
+  "version": "0.0.33",
   "description": "utils for qie projects",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
