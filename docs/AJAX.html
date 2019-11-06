@@ -66,90 +66,96 @@
 <pre><code class="hljs"><span class="hljs-selector-tag">npm</span> <span class="hljs-selector-tag">install</span> @<span class="hljs-keyword">qiejs</span>/<span class="hljs-keyword">qie</span>-<span class="hljs-keyword">ajax</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="初始化"></a><a href="#初始化" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>初始化</h2>
-<pre><code class="hljs css language-js"><span class="token comment">// ajax.js</span>
+<pre><code class="hljs css language-ts"><span class="hljs-comment">// ajax.js</span>
 
-<span class="token keyword">import</span> Ajax <span class="token keyword">from</span> <span class="token string">"@qiejs/qie-ajax"</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">"axios"</span><span class="token punctuation">;</span>
+<span class="hljs-keyword">import</span> Ajax <span class="hljs-keyword">from</span> <span class="hljs-string">"@qiejs/ajax"</span>;
+<span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">"axios"</span>;
 
-axios<span class="token punctuation">.</span>defaults<span class="token punctuation">.</span>timeout <span class="token operator">=</span> <span class="token number">60</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">;</span>
-axios<span class="token punctuation">.</span>defaults<span class="token punctuation">.</span>baseURL <span class="token operator">=</span> <span class="token string">"https://api.example.com"</span><span class="token punctuation">;</span>
+axios.defaults.timeout = <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>;
+axios.defaults.baseURL = <span class="hljs-string">"https://api.example.com"</span>;
 
-<span class="token comment">// ----------------- 拦截器</span>
-<span class="token comment">// 添加请求拦截器</span>
-axios<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>
-  <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">config</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 在发送请求之前做些什么</span>
-    <span class="token keyword">return</span> config<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 对请求错误做些什么</span>
-    <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="hljs-comment">// ----------------- 拦截器</span>
+<span class="hljs-comment">// 添加请求拦截器</span>
+axios.interceptors.request.use(
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">config</span>) </span>{
+    <span class="hljs-comment">// 在发送请求之前做些什么</span>
+    <span class="hljs-keyword">return</span> config;
+  },
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>) </span>{
+    <span class="hljs-comment">// 对请求错误做些什么</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error);
+  }
+);
 
-<span class="token comment">// 添加响应拦截器</span>
-axios<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>
-  <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 对响应数据做点什么</span>
-    <span class="token keyword">return</span> response<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 对响应错误做点什么</span>
-    <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="hljs-comment">// 添加响应拦截器</span>
+axios.interceptors.response.use(
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">response</span>) </span>{
+    <span class="hljs-comment">// 对响应数据做点什么</span>
+    <span class="hljs-keyword">return</span> response;
+  },
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>) </span>{
+    <span class="hljs-comment">// 对响应错误做点什么</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error);
+  }
+);
 
-<span class="token keyword">const</span> createAjax <span class="token operator">=</span> <span class="token function">Ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  axios<span class="token punctuation">:</span> axios<span class="token punctuation">,</span>
-  <span class="token comment">// post请求的数据类型</span>
-  dataType<span class="token punctuation">:</span> <span class="token string">"json"</span><span class="token punctuation">,</span>
-  <span class="token comment">// 根据不同框架来显示和隐藏 Loading</span>
-  loading<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token function-variable function">show</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-      Toast<span class="token punctuation">.</span><span class="token function">loading</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token function-variable function">hide</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-      Toast<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token comment">// 统一的异常处理</span>
-  <span class="token function-variable function">catch</span><span class="token punctuation">:</span> <span class="token parameter">err</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-    <span class="token function">alert</span><span class="token punctuation">(</span>err<span class="token punctuation">.</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="hljs-keyword">const</span> createAjax = Ajax({
+  axios: axios,
+  <span class="hljs-comment">// post请求的数据类型</span>
+  dataType: <span class="hljs-string">"json"</span>,
+  <span class="hljs-comment">// 根据不同框架来显示和隐藏 Loading</span>
+  loading: {
+    show: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+      Toast.loading();
+    },
+    hide: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+      Toast.clear();
+    }
+  },
+  <span class="hljs-comment">// 统一的异常处理</span>
+  <span class="hljs-keyword">catch</span>: <span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+    alert(err.message);
+  }
+});
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> createAjax<span class="token punctuation">;</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> createAjax;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="定义-api"></a><a href="#定义-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>定义 API</h3>
-<pre><code class="hljs css language-js"><span class="token comment">// api.js</span>
-<span class="token keyword">import</span> createAjax <span class="token keyword">from</span> <span class="token string">"./ajax"</span><span class="token punctuation">;</span>
+<pre><code class="hljs css language-ts"><span class="hljs-comment">// api.js</span>
+<span class="hljs-keyword">import</span> createAjax <span class="hljs-keyword">from</span> <span class="hljs-string">"./ajax"</span>;
+<span class="hljs-keyword">import</span> { ITransApiResult } <span class="hljs-keyword">from</span> <span class="hljs-string">"@qiejs/ajax"</span>;
 
-<span class="token keyword">const</span> apis <span class="token operator">=</span> <span class="token punctuation">{</span>
-  login<span class="token punctuation">:</span> <span class="token string">"post /login"</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">getUser</span><span class="token punctuation">:</span> <span class="token parameter">id</span> <span class="token operator">=></span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">get /user/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>id<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="hljs-comment">// api 配置</span>
+<span class="hljs-keyword">const</span> apis = {
+  login: <span class="hljs-string">"post /login"</span>,
+  getUser: <span class="hljs-function"><span class="hljs-params">id</span> =&gt;</span> <span class="hljs-string">`get /user/<span class="hljs-subst">${id}</span>`</span>
+};
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> createAjax<span class="token punctuation">.</span><span class="token function">regist</span><span class="token punctuation">(</span>apis<span class="token punctuation">,</span> <span class="token string">"/api"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="hljs-comment">// 类型定义</span>
+<span class="hljs-keyword">type</span> ApiNames = <span class="hljs-string">"login"</span> | <span class="hljs-string">"gettUser"</span>;
+<span class="hljs-keyword">type</span> IApiConfig = Record&lt;ApiNames, ITransApiResult&gt;;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> createAjax.regist&lt;IApiConfig&gt;(apis, <span class="hljs-string">"/api"</span>);
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="使用"></a><a href="#使用" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用</h3>
-<pre><code class="hljs css language-js"><span class="token keyword">import</span> api <span class="token keyword">from</span> <span class="token string">'./api'</span>
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">import</span> api <span class="hljs-keyword">from</span> <span class="hljs-string">'./api'</span>
 
-api<span class="token punctuation">.</span><span class="token function">login</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  data<span class="token punctuation">:</span> <span class="token punctuation">{</span>userName<span class="token punctuation">:</span> <span class="token string">'jack'</span><span class="token punctuation">,</span> passwrod<span class="token punctuation">:</span> <span class="token string">'12111'</span> <span class="token punctuation">}</span>
-  loading<span class="token punctuation">:</span> <span class="token boolean">true</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
+api.login({
+  data: {userName: <span class="hljs-string">'jack'</span>, passwrod: <span class="hljs-string">'12111'</span> }
+  loading: <span class="hljs-literal">true</span>
+}).then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(res)
+})
 
-api<span class="token punctuation">.</span><span class="token function">getUser</span><span class="token punctuation">(</span>userId<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  data<span class="token punctuation">:</span><span class="token punctuation">{</span> a<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-  loading<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-  catchError<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">err</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
+api.getUser(userId)({
+  data:{ a: <span class="hljs-number">1</span>},
+  loading: <span class="hljs-literal">true</span>,
+  catchError: <span class="hljs-literal">false</span>,
+}).then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(res)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="api"></a><a href="#api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>API</h3>
 <p>Ajax(options)</p>
