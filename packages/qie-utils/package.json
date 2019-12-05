@@ -1,15 +1,13 @@
 {
   "name": "@qiejs/utils",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "description": "utils for qie projects",
-  "main": "lib/index.js",
-  "types": "types/index.d.ts",
   "files": [
     "lib",
     "types"
   ],
   "scripts": {
-    "build": "npm run update-index && tsc",
+    "build": "tsc",
     "dev": "tsc -w",
     "update-index": "node scripts/update-index.js"
   },

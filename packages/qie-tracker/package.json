@@ -1,6 +1,6 @@
 {
   "name": "@qiejs/tracker",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "description": "tracker for business is buried point",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
