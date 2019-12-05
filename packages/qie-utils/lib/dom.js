@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.scrollTop = function (el, from, to, duration, endCallback) {
+var scrollTop = function (el, from, to, duration, endCallback) {
     if (from === void 0) { from = 0; }
     if (duration === void 0) { duration = 500; }
     if (!window.requestAnimationFrame) {
@@ -32,4 +32,7 @@ exports.scrollTop = function (el, from, to, duration, endCallback) {
         window.requestAnimationFrame(function () { return scroll(d, end, step); });
     };
     scroll(from, to, step);
+};
+exports.default = {
+    scrollTop: scrollTop
 };

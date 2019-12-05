@@ -1,7 +1,5 @@
 import numeral from "numeral";
-numeral.defaultFormat("0,0.00");
-
-export { numeral };
+numeral.defaultFormat("0.00");
 
 /**
  * 返回指定范围内的随机整数。
@@ -9,8 +7,7 @@ export { numeral };
  * @param {number} max 最大值
  * @example utilscore.randomNum(5,10) // => 5 || 6 || 7 || 8 || 9 || 10
  */
-export const randomNum = (min: number, max: number): number =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
+const randomNum = (min: number, max: number): number => Math.floor(Math.random() * (max - min + 1)) + min;
 
 /**
  * 将数字四舍五入到指定的小数位数。
@@ -18,7 +15,7 @@ export const randomNum = (min: number, max: number): number =>
  * @param {number} decimals 精确到几位小数
  * @example utilscore.round(12.555,2) // => 12.56
  */
-export const toFixedNum = (n: number, decimals = 0): number => {
+const toFixedNum = (n: number, decimals = 0): number => {
   return Number(`${Math.round(Number(`${n}e${decimals}`))}e-${decimals}`);
 };
 
@@ -29,15 +26,14 @@ export const toFixedNum = (n: number, decimals = 0): number => {
  * @returns {String}
  * @example utilscore.toDecimalMark(12345674654.123,'￥') // => "￥12,345,674,654.123"
  */
-export const toDecimalMark = (num: number, mark = ""): string =>
-  num.toLocaleString("en-US").replace(/^/, mark);
+const toDecimalMark = (num: number, mark = ""): string => num.toLocaleString("en-US").replace(/^/, mark);
 
 /**
  * 小数是否相等
  * @param x
  * @param y
  */
-export function epsEqDecimal(x: number, y: number): boolean {
+function epsEqDecimal(x: number, y: number): boolean {
   return Math.abs(x - y) < Number.EPSILON;
 }
 
@@ -46,7 +42,7 @@ export function epsEqDecimal(x: number, y: number): boolean {
  * @param v px数值
  * @param useUnit 是否添加 vw 单位
  */
-export function px2vw(v: number, useUnit = true): string {
+function px2vw(v: number, useUnit = true): string {
   return toFixedNum((v / 750) * 100, 3) + (useUnit ? "vw" : "");
 }
 
@@ -55,7 +51,7 @@ export function px2vw(v: number, useUnit = true): string {
  * @param v vw数值
  * @param useUnit 是否添加 px 单位
  */
-export function vw2Px(v: number, useUnit = true): string {
+function vw2Px(v: number, useUnit = true): string {
   return toFixedNum(750 * (v / 100), 3) + (useUnit ? "px" : "");
 }
 
@@ -63,7 +59,7 @@ export function vw2Px(v: number, useUnit = true): string {
  * 文件大小单位转换 kb 转 mb
  * @param num kb数值
  */
-export function kb2mb(num: number): string {
+function kb2mb(num: number): string {
   return (num / (1000 * 1000)).toFixed(2) + "M";
 }
 
@@ -72,12 +68,21 @@ export function kb2mb(num: number): string {
  * @param num
  * @param formatStr 字符串格式化
  */
-export function formatPrice(num: number, formatStr?: string): string {
+function formatPrice(num: number, formatStr?: string): string {
   if (!num) return "0";
   return numeral(num)
     .clone()
     .divide(100)
-    .format(formatStr || "0,0.00");
+    .format(formatStr || "0.00");
+}
+/**
+ * 去掉后面的0
+ * @param num
+ * @example 2.00 -> 2  2.10 -> 2.1
+ */
+function unFormat(num: number) {
+  if (!num) return 0.0;
+  return parseFloat(formatPrice(num));
 }
 
 /**
@@ -85,7 +90,7 @@ export function formatPrice(num: number, formatStr?: string): string {
  * @param v
  * @param formatStr
  */
-export function formatNum(v: number, formatStr: string) {
+function formatNum(v: number, formatStr: string) {
   return numeral(v).format(formatStr || "0,0");
 }
 
@@ -94,7 +99,7 @@ export function formatNum(v: number, formatStr: string) {
  * @param x
  * @param y
  */
-export function add(x: number, y: number) {
+function add(x: number, y: number) {
   return numeral(x).add(y);
 }
 
@@ -103,7 +108,7 @@ export function add(x: number, y: number) {
  * @param x
  * @param y
  */
-export function sub(x: number, y: number) {
+function sub(x: number, y: number) {
   return numeral(x).subtract(y);
 }
 
@@ -112,7 +117,7 @@ export function sub(x: number, y: number) {
  * @param x
  * @param y
  */
-export function mul(x: number, y: number) {
+function mul(x: number, y: number) {
   return numeral(x).multiply(y);
 }
 
@@ -121,6 +126,23 @@ export function mul(x: number, y: number) {
  * @param x
  * @param y
  */
-export function div(x: number, y: number) {
+function div(x: number, y: number) {
   return numeral(x).divide(y);
 }
+export default {
+  numeral,
+  randomNum,
+  toFixedNum,
+  toDecimalMark,
+  epsEqDecimal,
+  px2vw,
+  vw2Px,
+  kb2mb,
+  formatPrice,
+  unFormat,
+  formatNum,
+  add,
+  sub,
+  mul,
+  div
+};

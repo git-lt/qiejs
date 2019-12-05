@@ -7,4 +7,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 function sleep(ms) {
     return new Promise(function (r) { return setTimeout(r, ~~ms); });
 }
-exports.sleep = sleep;
+exports.default = {
+    sleep: sleep
+};

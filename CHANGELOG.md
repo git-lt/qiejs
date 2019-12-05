@@ -1,5 +1,50 @@
 <a name="1.0.0"></a>
-# [1.0.0](https://github.com/git-lt/qiejs/compare/v0.0.31...v1.0.0) (2019-09-19)
+# [1.0.0](https://github.com/git-lt/qiejs/compare/v0.0.39...v1.0.0) (2019-12-05)
+
+
+
+<a name="0.0.39"></a>
+## [0.0.39](https://github.com/git-lt/qiejs/compare/v0.0.38...v0.0.39) (2019-12-05)
+
+
+
+<a name="0.0.38"></a>
+## [0.0.38](https://github.com/git-lt/qiejs/compare/v0.0.37...v0.0.38) (2019-12-05)
+
+
+
+<a name="0.0.37"></a>
+## [0.0.37](https://github.com/git-lt/qiejs/compare/v0.0.36...v0.0.37) (2019-11-20)
+
+
+
+<a name="0.0.36"></a>
+## [0.0.36](https://github.com/git-lt/qiejs/compare/v0.0.35...v0.0.36) (2019-11-06)
+
+
+
+<a name="0.0.35"></a>
+## [0.0.35](https://github.com/git-lt/qiejs/compare/v0.0.34...v0.0.35) (2019-11-06)
+
+
+
+<a name="0.0.34"></a>
+## [0.0.34](https://github.com/git-lt/qiejs/compare/v0.0.33...v0.0.34) (2019-11-06)
+
+
+
+<a name="0.0.33"></a>
+## [0.0.33](https://github.com/git-lt/qiejs/compare/v0.0.33-0...v0.0.33) (2019-10-12)
+
+
+
+<a name="0.0.33-0"></a>
+## [0.0.33-0](https://github.com/git-lt/qiejs/compare/v0.0.32-0...v0.0.33-0) (2019-10-12)
+
+
+
+<a name="0.0.32-0"></a>
+## [0.0.32-0](https://github.com/git-lt/qiejs/compare/v0.0.31...v0.0.32-0) (2019-10-12)
 
 
 

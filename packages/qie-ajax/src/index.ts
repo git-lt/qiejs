@@ -1,10 +1,5 @@
 import qs from "qs";
-import {
-  AxiosRequestConfig,
-  Method,
-  CancelTokenSource,
-  AxiosStatic
-} from "axios";
+import { AxiosRequestConfig, Method, CancelTokenSource, AxiosStatic } from "axios";
 
 export interface ILoadingProps {
   show: Function;
@@ -37,6 +32,12 @@ export interface IRequestConfig {
   [propName: string]: any;
 }
 
+// 辅助 API调用提示
+export type ITransApiResult = <T = any>(config?: Partial<IRequestConfig>) => Promise<T>;
+export type ITransFnApiResult = (...params: any[]) => ITransApiResult;
+type ITransResult = ITransApiResult | ITransFnApiResult;
+type IApiTypes = Record<string, ITransResult>;
+
 const REQUEST_HEADERS = {
   default: { "Content-Type": "application/x-www-form-urlencoded" },
   json: { "Content-Type": "application/json" },
@@ -62,32 +63,23 @@ export class Request {
   }
 
   // 注册 api
-  regist(apis: Record<string, string | Function>, servicePrefix = "") {
+  regist<T extends IApiTypes>(apis: Record<string, string | Function>, servicePrefix = ""): T {
     Object.keys(apis).forEach(v => {
       const methodUrl = apis[v];
-
       if (typeof methodUrl === "function") {
-        apis[v] = (...params: any[]) =>
-          this._transfromToRequest(methodUrl(params), servicePrefix);
+        apis[v] = (...params: any[]) => this._transfromToRequest(methodUrl(params), servicePrefix);
       } else {
         apis[v] = this._transfromToRequest(methodUrl, servicePrefix);
       }
     });
-    return apis;
+    return apis as T;
   }
 
   // 转成 api 方法
-  _transfromToRequest(methodUrl: string, servicePrefix = "") {
+  _transfromToRequest(methodUrl: string, servicePrefix = ""): ITransApiResult {
     // 请求参数处理
-    return (config: Partial<IRequestConfig>) => {
-      let {
-        data = {},
-        dataType = this.dataType,
-        catchError = true,
-        headers = {},
-        loading = false,
-        ...others
-      } = config || {};
+    return (config?: Partial<IRequestConfig>) => {
+      let { data = {}, dataType = this.dataType, catchError = true, headers = {}, loading = false, ...others } = config || {};
 
       // 获取 方法 和 地址
       const pathInfo = methodUrl.split(" ");
@@ -122,9 +114,7 @@ export class Request {
 
       const requestPromise = this.axios(reqConfig);
 
-      const showLoadingPromise = new Promise(resolve =>
-        setTimeout(() => resolve(this.loadingDelay), this.loadingDelay)
-      );
+      const showLoadingPromise = new Promise(resolve => setTimeout(() => resolve(this.loadingDelay), this.loadingDelay));
 
       // 如果请求超过 260ms 则显示loading
       Promise.race([requestPromise, showLoadingPromise]).then(delay => {

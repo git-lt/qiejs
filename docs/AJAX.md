@@ -9,15 +9,15 @@ title: 对异步请求的封装
 ### 安装
 
 ```
-npm install @qiejs/qie-ajax
+npm install @qiejs/ajax
 ```
 
 ## 初始化
 
-```js
+```ts
 // ajax.js
 
-import Ajax from "@qiejs/qie-ajax";
+import Ajax from "@qiejs/ajax";
 import axios from "axios";
 
 axios.defaults.timeout = 60 * 1000;
@@ -72,21 +72,27 @@ export default createAjax;
 
 ### 定义 API
 
-```js
+```ts
 // api.js
 import createAjax from "./ajax";
+import { ITransApiResult } from "@qiejs/ajax";
 
+// api 配置
 const apis = {
   login: "post /login",
   getUser: id => `get /user/${id}`
 };
 
-export default createAjax.regist(apis, "/api");
+// 类型定义
+type ApiNames = "login" | "gettUser";
+type IApiConfig = Record<ApiNames, ITransApiResult>;
+
+export default createAjax.regist<IApiConfig>(apis, "/api");
 ```
 
 ### 使用
 
-```js
+```ts
 import api from './api'
 
 api.login({

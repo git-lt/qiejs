@@ -48,5 +48,4 @@ var TimeCountDown = /** @class */ (function () {
     };
     return TimeCountDown;
 }());
-var timeCountDown = function (config) { return new TimeCountDown(config); };
-exports.default = timeCountDown;
+exports.default = TimeCountDown;

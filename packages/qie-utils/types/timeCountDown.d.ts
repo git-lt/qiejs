@@ -23,5 +23,4 @@ declare class TimeCountDown {
     start(): void;
     stop(): void;
 }
-declare const timeCountDown: (config: ITimeCountDown) => TimeCountDown;
-export default timeCountDown;
+export default TimeCountDown;

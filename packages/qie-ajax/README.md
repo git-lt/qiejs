@@ -5,7 +5,7 @@
 ### 安装
 
 ```
-npm install @qiejs/qie-ajax
+npm install @qiejs/ajax
 ```
 
 ## 初始化
@@ -13,7 +13,7 @@ npm install @qiejs/qie-ajax
 ```js
 // ajax.js
 
-import Ajax from "@qiejs/qie-ajax";
+import Ajax from "@qiejs/ajax";
 import axios from "axios";
 
 axios.defaults.timeout = 60 * 1000;

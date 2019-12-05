@@ -9,7 +9,7 @@
         "title": "对异步请求的封装"
       },
       "CLI": {
-        "title": "CLI"
+        "title": "命令行工具"
       },
       "GETTING-STARTED": {
         "title": "安装及使用"
@@ -27,7 +27,7 @@
         "title": "业务埋点"
       },
       "UTILS": {
-        "title": "业务埋点"
+        "title": "常用工具类"
       }
     },
     "links": {

@@ -9,7 +9,7 @@ var LStore = /** @class */ (function () {
     function LStore(prefix) {
         var _this = this;
         this.init = function (keys) {
-            var props = Object.keys(keys).reduce(function (pre, key) {
+            var props = keys.reduce(function (pre, key) {
                 var keyName = "" + _this.prefix + key;
                 pre[key] = {
                     enumerable: true,

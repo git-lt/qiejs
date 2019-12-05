@@ -1,13 +1,14 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // https://juejin.im/post/5d245d4151882555300feb77#heading-27
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.regMap = {
     // 手机号
-    phone: /^1[3|4|5|7|8]\d{9}$/,
-    // 价格
-    price: /(^[1-9](\d+)?(\.\d{1,2})?$)|(^\d\.0[1-9]$)|(^\d\.[1-9]{1,2}$)/,
+    phone: /^1[2-9]\d{9}$/,
+    // 价格 最多保留两们小数
+    price: /^[0-9]{1}\d*(.\d{1,2})?$|^0.\d{1,2}$/,
     // 身份证号
     idCard: /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/,
+    // 是否为中文字符
     chinese: /^[\u4e00-\u9fa5]{0,}$/,
     // 包含0的正整数
     int: /^0|([1-9]\d*)\b/,
@@ -17,12 +18,14 @@ exports.regMap = {
     email: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
     // 座机号
     tel: /^(0\d{2,3}-\d{7,8})(-\d{1,4})?$/,
-    // 英文
+    // 字母
     english: /^[a-zA-Z]+$/,
     // 数字或字母
     numberOrLetter: /^[A-Za-z0-9]+$/,
     // url地址
-    url: /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i
+    url: /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i,
+    // 是否有空格, 中间或两头有空格都算
+    hasSpace: /\s/
 };
 var rules = {
     phone: { pattern: exports.regMap.phone, message: "请输入正确的手机号码" },
@@ -40,4 +43,7 @@ var rules = {
     // 大于0的整数
     gtZeroInt: { pattern: exports.regMap.gtZeroInt, message: "请输入大于0的整数" }
 };
-exports.default = rules;
+exports.default = {
+    rules: rules,
+    regMap: exports.regMap
+};

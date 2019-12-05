@@ -1,10 +1,4 @@
-export const scrollTop = (
-  el: HTMLElement | Window,
-  from = 0,
-  to: number,
-  duration = 500,
-  endCallback: Function
-) => {
+const scrollTop = (el: HTMLElement | Window, from = 0, to: number, duration = 500, endCallback: Function) => {
   if (!window.requestAnimationFrame) {
     window.requestAnimationFrame =
       window.webkitRequestAnimationFrame ||
@@ -36,4 +30,8 @@ export const scrollTop = (
     window.requestAnimationFrame(() => scroll(d, end, step));
   };
   scroll(from, to, step);
+};
+
+export default {
+  scrollTop
 };

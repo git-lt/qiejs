@@ -10,7 +10,7 @@ class LStore<T> {
   }
 
   init = (keys: string[]): T => {
-    const props = Object.keys(keys).reduce((pre: any, key) => {
+    const props = keys.reduce((pre: any, key) => {
       const keyName = `${this.prefix}${key}`;
       pre[key] = {
         enumerable: true,

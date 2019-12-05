@@ -1,21 +1,12 @@
 "use strict";
-/**
- * Fast UUID generator, RFC4122 version 4 compliant.
- * @author Jeff Ward (jcward.com).
- * @license MIT license
- * @link http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript/21963136#21963136
- **/
 Object.defineProperty(exports, "__esModule", { value: true });
 var lut = [];
 for (var i = 0; i < 256; i++) {
     lut[i] = (i < 16 ? "0" : "") + i.toString(16);
 }
 /**
- * `uuid` generates a Version 4 UUID using Jeff Ward's high performance
- * generator.
- *
- * @export
- * @returns {string}
+ * 创建唯一ID
+ * @example uuid() // "5de77f38-3e1b-4aca-9561-2a18165a77d9"
  */
 function uuid() {
     var d0 = (Math.random() * 0xffffffff) | 0;
@@ -44,3 +35,20 @@ function uuid() {
         lut[(d3 >> 24) & 0xff]);
 }
 exports.uuid = uuid;
+/**
+ * 创建指定长度的ID，可添加前缀
+ * @param length id的长度，不包含前缀长度
+ * @param prefix 前缀，默认为空
+ * @example randomId() // 05bbfd
+ */
+function randomId(length, prefix) {
+    if (length === void 0) { length = 6; }
+    if (prefix === void 0) { prefix = ""; }
+    // 随机指定个数-1个字符，再加一个随几数
+    return (prefix +
+        Math.random()
+            .toString(16)
+            .slice(2, length + 1) +
+        String((Math.random() * 10) << 0));
+}
+exports.randomId = randomId;

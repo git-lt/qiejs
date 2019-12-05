@@ -37,8 +37,7 @@ class TimeCountDown {
   }
   start() {
     this.count++;
-    const offset =
-      new Date().getTime() - (this.endTime + this.count * this.interval);
+    const offset = new Date().getTime() - (this.endTime + this.count * this.interval);
     let nextTime = this.interval - offset;
     if (nextTime < 0) {
       nextTime = 0;
@@ -71,6 +70,4 @@ class TimeCountDown {
   }
 }
 
-const timeCountDown = (config: ITimeCountDown) => new TimeCountDown(config);
-
-export default timeCountDown;
+export default TimeCountDown;
