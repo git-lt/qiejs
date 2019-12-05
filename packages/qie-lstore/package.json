@@ -1,6 +1,6 @@
 {
   "name": "@qiejs/lstore",
-  "version": "0.0.38",
+  "version": "0.0.39",
   "description": "lstore for localstorage",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
@@ -23,8 +23,5 @@
     "utils"
   ],
   "author": "LIUTAO <hz_liutao@qq.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/store": "^2.0.2"
-  }
+  "license": "MIT"
 }
