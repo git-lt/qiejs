@@ -1,6 +1,6 @@
 {
   "name": "@qiejs/jsbridge",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "description": "jsbridge for qie webview",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
