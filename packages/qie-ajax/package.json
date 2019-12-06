@@ -1,6 +1,6 @@
 {
   "name": "@qiejs/ajax",
-  "version": "0.0.41",
+  "version": "0.0.42",
   "description": "ajax for axios",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
