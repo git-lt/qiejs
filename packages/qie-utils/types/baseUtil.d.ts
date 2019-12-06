@@ -20,12 +20,14 @@ declare const _default: {
     isFunction: (x: any) => boolean;
     isString: (x: any) => boolean;
     isBoolean: (x: any) => boolean;
-    isPlainObject: (x: string) => boolean;
+    isPlainObject: (x: any) => boolean;
     isUndefined: (x: any) => boolean;
-    isArray: (x: string) => boolean;
+    isDate: (x: any) => boolean;
+    isNumber: (x: any) => boolean;
+    isArray: (x: any) => boolean;
     isNull: (x: any) => boolean;
     isNullOrUndefined: (x: any) => boolean;
-    isEmpty: (obj: any) => boolean;
+    isEmptyObj: (obj: any) => boolean;
     deepClone: typeof deepClone;
     deepMerge: typeof deepMerge;
 };

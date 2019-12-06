@@ -11,7 +11,7 @@ var url_parse_1 = __importDefault(require("url-parse"));
  * @example getUrlParam('name') // 'aaa'
  */
 function getUrlParam(key, path) {
-    var query = url_parse_1.default(path || window.location.href).query;
+    var query = url_parse_1.default(path || window.location.href, true).query;
     return !!key ? query[key] : query;
 }
 /**
@@ -35,7 +35,7 @@ function urlToList(url) {
  * @param key
  */
 function removeParam(key, path) {
-    var parse = url_parse_1.default(path || window.location.href);
+    var parse = url_parse_1.default(path || window.location.href, true);
     delete parse.query[key];
     parse.set("query", parse.query);
     return parse.toString();
@@ -46,7 +46,7 @@ function removeParam(key, path) {
  * @param key
  */
 function addParam(key, value, path) {
-    var parse = url_parse_1.default(path || window.location.href);
+    var parse = url_parse_1.default(path || window.location.href, true);
     parse.query[key] = value;
     parse.set("query", parse.query);
     return parse.toString();

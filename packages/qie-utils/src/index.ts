@@ -1,21 +1,21 @@
-import * as TimeCountDown from './TimeCountDown'
-import * as base from './base'
-import * as date from './date'
-import * as dom from './dom'
-import * as number from './number'
-import * as promise from './promise'
-import * as rules from './rules'
-import * as string from './string'
-import * as url from './url'
+import TimeCountDown from './TimeCountDown'
+import baseUtil from './baseUtil'
+import dateUtil from './dateUtil'
+import domUtil from './domUtil'
+import numberUtil from './numberUtil'
+import promiseUtil from './promiseUtil'
+import rulesUtil from './rulesUtil'
+import stringUtil from './stringUtil'
+import urlUtil from './urlUtil'
 
 export {
   TimeCountDown,
-  base,
-  date,
-  dom,
-  number,
-  promise,
-  rules,
-  string,
-  url,
+  baseUtil,
+  dateUtil,
+  domUtil,
+  numberUtil,
+  promiseUtil,
+  rulesUtil,
+  stringUtil,
+  urlUtil,
 }

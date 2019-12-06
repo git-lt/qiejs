@@ -6,7 +6,7 @@
 const _toString = Object.prototype.toString;
 const getObjectType = (x: any) => _toString.call(x).slice(8, -1);
 const isOfType = (type: string) => (x: any) => typeof x === type; // eslint-disable-line valid-typeof
-const isObjectOfType = (type: string) => (x: string) => getObjectType(x) === type;
+const isObjectOfType = (type: string) => (x: any) => getObjectType(x) === type;
 const ua = window.navigator.userAgent;
 
 const isAndroid = /android/gi.test(ua);
@@ -15,14 +15,15 @@ const isIpad = /ipad/gi.test(ua);
 const isWx = /MicroMessenger/gi.test(ua);
 const isAli = /AlipayClient/gi.test(ua);
 const isPhone = /(iPhone|iPad|iPod|iOS|Android)/i.test(ua);
-
 const isObject = (obj: any) => obj !== null && typeof obj === "object";
 const isFunction = isOfType("function");
 const isString = isOfType("string");
+const isNumber = isObjectOfType("Number");
 const isBoolean = isOfType("boolean");
 const isPlainObject = isObjectOfType("Object");
 const isUndefined = isOfType("undefined");
 const isArray = isObjectOfType("Array");
+const isDate = isObjectOfType("Date");
 const isNull = (x: any) => x === null;
 const isNullOrUndefined = (x: any) => isUndefined(x) || isNull(x);
 
@@ -30,7 +31,7 @@ const isNullOrUndefined = (x: any) => isUndefined(x) || isNull(x);
  * 判断是否为空，包括空对象，空数组，空字符串，null，undefined
  * @param obj 任意对象
  */
-const isEmpty = (obj: any) => {
+const isEmptyObj = (obj: any) => {
   if (obj === void 0 || obj === null) return true;
   if (isObject(obj)) return !Object.keys(obj).length;
   if (isArray(obj)) return !obj.length;
@@ -114,10 +115,12 @@ export default {
   isBoolean,
   isPlainObject,
   isUndefined,
+  isDate,
+  isNumber,
   isArray,
   isNull,
   isNullOrUndefined,
-  isEmpty,
+  isEmptyObj,
   deepClone,
   deepMerge
 };

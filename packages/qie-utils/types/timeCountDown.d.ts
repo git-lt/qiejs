@@ -11,7 +11,7 @@ export interface ITimeCountTickData {
     seconds: number;
     milliseconds: number;
 }
-declare class TimeCountDown {
+export default class TimeCountDown {
     ms: number;
     timmer: number;
     onTick: Function;
@@ -23,4 +23,3 @@ declare class TimeCountDown {
     start(): void;
     stop(): void;
 }
-export default TimeCountDown;

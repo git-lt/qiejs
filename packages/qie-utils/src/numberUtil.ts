@@ -1,13 +1,17 @@
 import numeral from "numeral";
 numeral.defaultFormat("0.00");
 
+// type Numer = typeof numeral;
+
 /**
  * 返回指定范围内的随机整数。
  * @param {number} min 最小值
  * @param {number} max 最大值
  * @example utilscore.randomNum(5,10) // => 5 || 6 || 7 || 8 || 9 || 10
  */
-const randomNum = (min: number, max: number): number => Math.floor(Math.random() * (max - min + 1)) + min;
+function randomNum(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 /**
  * 将数字四舍五入到指定的小数位数。
@@ -15,9 +19,9 @@ const randomNum = (min: number, max: number): number => Math.floor(Math.random()
  * @param {number} decimals 精确到几位小数
  * @example utilscore.round(12.555,2) // => 12.56
  */
-const toFixedNum = (n: number, decimals = 0): number => {
+function toFixedNum(n: number, decimals = 0): number {
   return Number(`${Math.round(Number(`${n}e${decimals}`))}e-${decimals}`);
-};
+}
 
 /**
  * 将数字转化为千分位格式,可以在数字前面加上符号
@@ -26,7 +30,9 @@ const toFixedNum = (n: number, decimals = 0): number => {
  * @returns {String}
  * @example utilscore.toDecimalMark(12345674654.123,'￥') // => "￥12,345,674,654.123"
  */
-const toDecimalMark = (num: number, mark = ""): string => num.toLocaleString("en-US").replace(/^/, mark);
+function toDecimalMark(num: number, mark = ""): string {
+  return num.toLocaleString("en-US").replace(/^/, mark);
+}
 
 /**
  * 小数是否相等
@@ -99,8 +105,11 @@ function formatNum(v: number, formatStr: string) {
  * @param x
  * @param y
  */
-function add(x: number, y: number) {
-  return numeral(x).add(y);
+function add(x: number, y: number): string {
+  return numeral(x)
+    .clone()
+    .add(y)
+    .toString();
 }
 
 /**
@@ -108,8 +117,11 @@ function add(x: number, y: number) {
  * @param x
  * @param y
  */
-function sub(x: number, y: number) {
-  return numeral(x).subtract(y);
+function sub(x: number, y: number): string {
+  return numeral(x)
+    .clone()
+    .subtract(y)
+    .toString();
 }
 
 /**
@@ -117,8 +129,11 @@ function sub(x: number, y: number) {
  * @param x
  * @param y
  */
-function mul(x: number, y: number) {
-  return numeral(x).multiply(y);
+function mul(x: number, y: number): string {
+  return numeral(x)
+    .clone()
+    .multiply(y)
+    .toString();
 }
 
 /**
@@ -126,11 +141,14 @@ function mul(x: number, y: number) {
  * @param x
  * @param y
  */
-function div(x: number, y: number) {
-  return numeral(x).divide(y);
+function div(x: number, y: number): string {
+  return numeral(x)
+    .clone()
+    .divide(y)
+    .toString();
 }
+
 export default {
-  numeral,
   randomNum,
   toFixedNum,
   toDecimalMark,

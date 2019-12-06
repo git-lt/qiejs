@@ -1,6 +1,6 @@
 // https://juejin.im/post/5d245d4151882555300feb77#heading-27
 
-export const regMap = {
+const regMap = {
   // 手机号
   phone: /^1[2-9]\d{9}$/,
   // 价格 最多保留两们小数
@@ -44,7 +44,4 @@ const rules = {
   gtZeroInt: { pattern: regMap.gtZeroInt, message: "请输入大于0的整数" }
 };
 
-export default {
-  rules,
-  regMap
-};
+export default { regMap, rules };

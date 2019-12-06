@@ -7,29 +7,44 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var _toString = Object.prototype.toString;
 var getObjectType = function (x) { return _toString.call(x).slice(8, -1); };
 var isOfType = function (type) { return function (x) { return typeof x === type; }; }; // eslint-disable-line valid-typeof
-var isObjectOfType = function (type) { return function (x) {
-    return getObjectType(x) === type;
-}; };
-exports.isObject = function (obj) { return obj !== null && typeof obj === "object"; };
-exports.isFunction = isOfType("function");
-exports.isString = isOfType("string");
-exports.isBoolean = isOfType("boolean");
-exports.isPlainObject = isObjectOfType("Object");
-exports.isUndefined = isOfType("undefined");
-exports.isArray = isObjectOfType("Array");
-exports.isNull = function (x) { return x === null; };
-exports.isNullOrUndefined = function (x) { return exports.isUndefined(x) || exports.isNull(x); };
-exports.isEmpty = function (value) {
-    if (value === void 0 || value === null)
+var isObjectOfType = function (type) { return function (x) { return getObjectType(x) === type; }; };
+var ua = window.navigator.userAgent;
+var isAndroid = /android/gi.test(ua);
+var isIphone = /iphone|ipod/gi.test(ua);
+var isIpad = /ipad/gi.test(ua);
+var isWx = /MicroMessenger/gi.test(ua);
+var isAli = /AlipayClient/gi.test(ua);
+var isPhone = /(iPhone|iPad|iPod|iOS|Android)/i.test(ua);
+var isObject = function (obj) { return obj !== null && typeof obj === "object"; };
+var isFunction = isOfType("function");
+var isString = isOfType("string");
+var isNumber = isObjectOfType("Number");
+var isBoolean = isOfType("boolean");
+var isPlainObject = isObjectOfType("Object");
+var isUndefined = isOfType("undefined");
+var isArray = isObjectOfType("Array");
+var isDate = isObjectOfType("Date");
+var isNull = function (x) { return x === null; };
+var isNullOrUndefined = function (x) { return isUndefined(x) || isNull(x); };
+/**
+ * 判断是否为空，包括空对象，空数组，空字符串，null，undefined
+ * @param obj 任意对象
+ */
+var isEmptyObj = function (obj) {
+    if (obj === void 0 || obj === null)
         return true;
-    if (exports.isObject(value))
-        return !Object.keys(value).length;
-    if (exports.isArray(value))
-        return !value.length;
-    if (exports.isString(value))
-        return !value;
-    return value.toString().length == 0;
+    if (isObject(obj))
+        return !Object.keys(obj).length;
+    if (isArray(obj))
+        return !obj.length;
+    if (isString(obj))
+        return !obj;
+    return obj.toString().length == 0;
 };
+/**
+ * 深拷贝
+ * @param obj 任意对象
+ */
 function deepClone(obj) {
     if (obj === undefined || obj === null || typeof obj !== "object") {
         return obj;
@@ -66,7 +81,11 @@ function deepClone(obj) {
     }
     return dup;
 }
-exports.deepClone = deepClone;
+/**
+ * 深合并
+ * @param object
+ * @param sources
+ */
 function deepMerge(object) {
     var sources = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -77,10 +96,7 @@ function deepMerge(object) {
             if (source.hasOwnProperty(field)) {
                 var a = object[field];
                 var b = source[field];
-                if (exports.isObject(a) &&
-                    exports.isObject(b) &&
-                    !Array.isArray(a) &&
-                    !Array.isArray(b)) {
+                if (isObject(a) && isObject(b) && !Array.isArray(a) && !Array.isArray(b)) {
                     deepMerge(a, b);
                 }
                 else if (b !== undefined) {
@@ -91,40 +107,25 @@ function deepMerge(object) {
     });
     return object;
 }
-exports.deepMerge = deepMerge;
-function deepGet(obj, pathName) {
-    var path = pathName.split(".");
-    var index = -1;
-    var result = obj;
-    path.shift();
-    while (++index < path.length) {
-        result = result[path[index]];
-        if (!result) {
-            return result;
-        }
-    }
-    return result;
-}
-exports.deepGet = deepGet;
-function deepSet(obj, pathName, value) {
-    var path = pathName.split(".");
-    path.shift();
-    var ptr = obj;
-    var prop = path.pop();
-    var segment;
-    for (var i = 0, l = path.length; i < l; i++) {
-        segment = path[i];
-        if (ptr[segment] === undefined) {
-            ptr[segment] = typeof segment === "number" ? [] : {};
-        }
-        ptr = ptr[segment];
-    }
-    if (ptr[prop] === value) {
-        return false;
-    }
-    else {
-        ptr[prop] = value;
-        return true;
-    }
-}
-exports.deepSet = deepSet;
+exports.default = {
+    isAndroid: isAndroid,
+    isIphone: isIphone,
+    isIpad: isIpad,
+    isWx: isWx,
+    isAli: isAli,
+    isPhone: isPhone,
+    isObject: isObject,
+    isFunction: isFunction,
+    isString: isString,
+    isBoolean: isBoolean,
+    isPlainObject: isPlainObject,
+    isUndefined: isUndefined,
+    isDate: isDate,
+    isNumber: isNumber,
+    isArray: isArray,
+    isNull: isNull,
+    isNullOrUndefined: isNullOrUndefined,
+    isEmptyObj: isEmptyObj,
+    deepClone: deepClone,
+    deepMerge: deepMerge
+};

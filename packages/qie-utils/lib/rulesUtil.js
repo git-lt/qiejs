@@ -1,7 +1,7 @@
 "use strict";
 // https://juejin.im/post/5d245d4151882555300feb77#heading-27
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.regMap = {
+var regMap = {
     // 手机号
     phone: /^1[2-9]\d{9}$/,
     // 价格 最多保留两们小数
@@ -28,22 +28,19 @@ exports.regMap = {
     hasSpace: /\s/
 };
 var rules = {
-    phone: { pattern: exports.regMap.phone, message: "请输入正确的手机号码" },
-    price: { pattern: exports.regMap.price, message: "请输入最多两位小数的金额" },
-    idCard: { pattern: exports.regMap.idCard, message: "身份证格式不正确" },
-    chinese: { pattern: exports.regMap.chinese, message: "请输入中文字符" },
+    phone: { pattern: regMap.phone, message: "请输入正确的手机号码" },
+    price: { pattern: regMap.price, message: "请输入最多两位小数的金额" },
+    idCard: { pattern: regMap.idCard, message: "身份证格式不正确" },
+    chinese: { pattern: regMap.chinese, message: "请输入中文字符" },
     url: {
-        pattern: exports.regMap.url,
+        pattern: regMap.url,
         message: "请输入以 http: 或 https: 开头的链接地址"
     },
     numberOrLetter: {
-        pattern: exports.regMap.numberOrLetter,
+        pattern: regMap.numberOrLetter,
         message: "请输入数字或字母"
     },
     // 大于0的整数
-    gtZeroInt: { pattern: exports.regMap.gtZeroInt, message: "请输入大于0的整数" }
+    gtZeroInt: { pattern: regMap.gtZeroInt, message: "请输入大于0的整数" }
 };
-exports.default = {
-    rules: rules,
-    regMap: exports.regMap
-};
+exports.default = { regMap: regMap, rules: rules };

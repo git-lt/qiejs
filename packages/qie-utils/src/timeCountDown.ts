@@ -15,7 +15,7 @@ export interface ITimeCountTickData {
 
 const noop = () => {};
 
-class TimeCountDown {
+export default class TimeCountDown {
   ms: number;
   timmer: number;
   onTick: Function;
@@ -69,5 +69,3 @@ class TimeCountDown {
     this.timmer = null;
   }
 }
-
-export default TimeCountDown;

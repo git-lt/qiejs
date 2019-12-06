@@ -1,18 +1,18 @@
-export declare const regMap: {
-    phone: RegExp;
-    price: RegExp;
-    idCard: RegExp;
-    chinese: RegExp;
-    int: RegExp;
-    gtZeroInt: RegExp;
-    email: RegExp;
-    tel: RegExp;
-    english: RegExp;
-    numberOrLetter: RegExp;
-    url: RegExp;
-    hasSpace: RegExp;
-};
 declare const _default: {
+    regMap: {
+        phone: RegExp;
+        price: RegExp;
+        idCard: RegExp;
+        chinese: RegExp;
+        int: RegExp;
+        gtZeroInt: RegExp;
+        email: RegExp;
+        tel: RegExp;
+        english: RegExp;
+        numberOrLetter: RegExp;
+        url: RegExp;
+        hasSpace: RegExp;
+    };
     rules: {
         phone: {
             pattern: RegExp;
@@ -42,20 +42,6 @@ declare const _default: {
             pattern: RegExp;
             message: string;
         };
-    };
-    regMap: {
-        phone: RegExp;
-        price: RegExp;
-        idCard: RegExp;
-        chinese: RegExp;
-        int: RegExp;
-        gtZeroInt: RegExp;
-        email: RegExp;
-        tel: RegExp;
-        english: RegExp;
-        numberOrLetter: RegExp;
-        url: RegExp;
-        hasSpace: RegExp;
     };
 };
 export default _default;

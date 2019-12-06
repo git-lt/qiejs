@@ -8,21 +8,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param {string} _mask 遮蔽字符
  * @example utilscore.mask('12398765432',3,7) // => "123****5432"
  */
-exports.numberMask = function (str, startIndex, endIndex, _mask) {
+function numberMask(str, startIndex, endIndex, _mask) {
     if (startIndex === void 0) { startIndex = 0; }
     if (endIndex === void 0) { endIndex = 0; }
     if (_mask === void 0) { _mask = "*"; }
     var reg = new RegExp("^(.{" + startIndex + "})(.{" + (endIndex - startIndex) + "})(." + (endIndex >= str.length ? "?" : "+") + ")$");
     return str.replace(reg, function (_$0, $1, $2, $3) { return $1 + $2.replace(/./g, _mask) + $3; });
-};
+}
 /**
  * 生成一个随机的十六进制颜色代码
  * @example utilscore.randomHexColorCode() // => "#c4aabc"
  */
-exports.randomHexColorCode = function () {
+function randomHexColorCode() {
     var n = ((Math.random() * 0xfffff) | 0).toString(16);
     return "#" + (n.length !== 6 ? ((Math.random() * 0xf) | 0).toString(16) + n : n);
-};
+}
 /**
  * 获取中文字符长度
  * @param str 字符串
@@ -31,7 +31,6 @@ exports.randomHexColorCode = function () {
 function getCNStrLength(str) {
     return str.replace(/[\u0391-\uFFE5]/g, "aa").length / 2;
 }
-exports.getCNStrLength = getCNStrLength;
 /**
  * 获取文件后缀
  * @param fileName 文件名
@@ -85,7 +84,7 @@ function delWhitespace(input) {
     return input.replace(/\s+/g, "");
 }
 /**
- * 判断字符串是否为空
+ * 判断字符串是否为空(null，空字串‘’， 都是空格‘  ’)
  * @param {String} input 输入字符串，如'我是测试的字符串'
  * @returns {boolean} 是/否
  *
@@ -135,6 +134,9 @@ function randomId(length, prefix) {
         String((Math.random() * 10) << 0));
 }
 exports.default = {
+    numberMask: numberMask,
+    randomHexColorCode: randomHexColorCode,
+    getCNStrLength: getCNStrLength,
     getFileSuffix: getFileSuffix,
     getNameById: getNameById,
     repeat: repeat,

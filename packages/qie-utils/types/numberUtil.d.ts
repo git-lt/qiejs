@@ -1,4 +1,26 @@
 /**
+ * 返回指定范围内的随机整数。
+ * @param {number} min 最小值
+ * @param {number} max 最大值
+ * @example utilscore.randomNum(5,10) // => 5 || 6 || 7 || 8 || 9 || 10
+ */
+declare function randomNum(min: number, max: number): number;
+/**
+ * 将数字四舍五入到指定的小数位数。
+ * @param {number} n 操作的数字
+ * @param {number} decimals 精确到几位小数
+ * @example utilscore.round(12.555,2) // => 12.56
+ */
+declare function toFixedNum(n: number, decimals?: number): number;
+/**
+ * 将数字转化为千分位格式,可以在数字前面加上符号
+ * @param {Number|String} num
+ * @param {String} mark
+ * @returns {String}
+ * @example utilscore.toDecimalMark(12345674654.123,'￥') // => "￥12,345,674,654.123"
+ */
+declare function toDecimalMark(num: number, mark?: string): string;
+/**
  * 小数是否相等
  * @param x
  * @param y
@@ -44,30 +66,29 @@ declare function formatNum(v: number, formatStr: string): string;
  * @param x
  * @param y
  */
-declare function add(x: number, y: number): Numeral;
+declare function add(x: number, y: number): string;
 /**
  * 减
  * @param x
  * @param y
  */
-declare function sub(x: number, y: number): Numeral;
+declare function sub(x: number, y: number): string;
 /**
  * 乘
  * @param x
  * @param y
  */
-declare function mul(x: number, y: number): Numeral;
+declare function mul(x: number, y: number): string;
 /**
  * 除
  * @param x
  * @param y
  */
-declare function div(x: number, y: number): Numeral;
+declare function div(x: number, y: number): string;
 declare const _default: {
-    numeral: Numeral;
-    randomNum: (min: number, max: number) => number;
-    toFixedNum: (n: number, decimals?: number) => number;
-    toDecimalMark: (num: number, mark?: string) => string;
+    randomNum: typeof randomNum;
+    toFixedNum: typeof toFixedNum;
+    toDecimalMark: typeof toDecimalMark;
     epsEqDecimal: typeof epsEqDecimal;
     px2vw: typeof px2vw;
     vw2Px: typeof vw2Px;

@@ -7,7 +7,7 @@ import url from "url-parse";
  * @example getUrlParam('name') // 'aaa'
  */
 function getUrlParam(key?: string, path?: string) {
-  const query = url(path || window.location.href).query;
+  const query = url(path || window.location.href, true).query;
   return !!key ? query[key] : query;
 }
 
@@ -34,7 +34,7 @@ function urlToList(url: string): string[] {
  * @param key
  */
 function removeParam(key: string, path?: string): string {
-  const parse = url(path || window.location.href);
+  const parse = url(path || window.location.href, true);
   delete parse.query[key];
   parse.set("query", parse.query);
   return parse.toString();
@@ -46,7 +46,7 @@ function removeParam(key: string, path?: string): string {
  * @param key
  */
 function addParam(key: string, value: string, path?: string): string {
-  const parse = url(path || window.location.href);
+  const parse = url(path || window.location.href, true);
   parse.query[key] = value;
   parse.set("query", parse.query);
   return parse.toString();

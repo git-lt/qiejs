@@ -9,7 +9,7 @@ const modules = fs
   .filter(v => v !== "index.ts" && v !== "globals.d.ts")
   .map(v => v.slice(0, v.indexOf(".")));
 
-const getImport = (n, p) => `import * as ${n} from '${p}'`;
+const getImport = (n, p) => `import ${n} from '${p}'`;
 
 const code =
   [...modules.map(v => getImport(v, `./${v}`))].join("\n") + `\n\nexport {\n` + [...modules].map(v => `  ${v},`).join("\n") + "\n}";
