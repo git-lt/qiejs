@@ -1,6 +1,6 @@
 {
   "name": "@qiejs/cli",
-  "version": "0.0.46",
+  "version": "0.0.47",
   "description": "cli tool for qie",
   "main": "index.js",
   "scripts": {
