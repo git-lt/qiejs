@@ -1,13 +1,11 @@
 {
   "name": "@qiejs/cli",
-  "version": "0.1.0-0",
+  "version": "0.1.1-0",
   "description": "cli tool for qie",
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "",
-    "clean": "rimraf dist",
-    "prepack": "npm run build"
+    "clean": "rimraf dist"
   },
   "files": [
     "bin",
