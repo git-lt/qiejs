@@ -1,48 +1,54 @@
 #! /usr/bin/env node
 
-const program = require("commander");
-const { getPkgVersion, printPkgVersion, homedir } = require("../dist/util");
-const { existsQieConfigFile } = require("../dist/util");
+const program = require('commander');
+const { getPkgVersion } = require('../lib/util');
 
-printPkgVersion();
+// 打印版本号
+console.log(`🐧  qie-cli v${getPkgVersion()} \n`);
 
-// program
-//   .version(getPkgVersion())
-//   .usage("<command> [options]")
-//   .command("init [projectName]", "Init a project with default templete")
-//   .command("config <cmd>", "Taro config")
-//   .command("create [type]", "Create page or component for project")
-//   .command("build", "Build a project with options")
-//   .command("update", "Update packages of taro")
-//   .command("convert", "Convert weapp to taro")
-//   .command("info", "Diagnostics Taro env info")
-//   .command("doctor", "Diagnose taro project")
-//   .parse(process.argv);
-
-program.version(getPkgVersion()).usage("<command> [options]");
+program.version(getPkgVersion()).usage('<command> [options]');
 
 program
-  .command("init")
-  .description("init a cli config with templete")
-  .action(options => {
-    require("../dist/initConfig").default(options);
+  .command('login')
+  .description('初始化登录信息')
+  .action(() => {
+    require('../lib/login')();
   });
 
 program
-  .command("upload")
-  .description("upload a zip file to OSS")
-  .option("-r --record", "record version info to DB (only have pms -z)")
-  .option(
-    "-d --dir [dirName]",
-    "upload directory to OSS, dirName default value is zip"
-  )
+  .command('create <app-name>')
+  .description('创建一个新项目')
+  .option('-g, --git [message]', '使用 git 初始化项目，并添加首次提交信息')
+  .action((name, cmd) => {
+    require('../lib/create')(name, cleanArgs(cmd));
+  });
+
+program
+  .command('page <pageName>')
+  .description('创建一个页面')
+  .option('-r, --react', '生成一个 react 列表页面')
+  .option('-v, --vue', '生成一个 vue 页面')
+  .action((name, cmd) => {
+    require('../lib/page')(name, cleanArgs(cmd));
+  });
+
+program
+  .command('init')
+  .description('初始化一个项目配置')
+  .action(() => {
+    require('../lib/init')();
+  });
+
+program
+  .command('upload')
+  .description('上传资源包')
+  .option('-r --record', '提交版本信息')
+  .option('-d --dir <dirName>', `设置上传目录`)
+  .option('-g --region <region>', 'oss region')
+  .option('-b --bucket <bucket>', 'oss bucket')
+  .option('-p --prefix <prefix>', 'oss prefix')
   .action(options => {
-    const { record, dir, prefix } = options;
-    const pms = { record, dir, prefix };
-    // 检查配置文件是否存在
-    existsQieConfigFile();
-    // 上传
-    require("../dist/upload").default(pms);
+    require('../lib/upload')(cleanArgs(options));
   });
 
 program.parse(process.argv);
@@ -50,4 +56,21 @@ program.parse(process.argv);
 // 不带任何参数里，打印 帮助
 if (!process.argv.slice(2).length) {
   program.outputHelp();
+}
+
+function camelize(str) {
+  return str.replace(/-(\w)/g, (_, c) => (c ? c.toUpperCase() : ''));
+}
+
+function cleanArgs(cmd) {
+  const args = {};
+  cmd.options.forEach(o => {
+    const key = camelize(o.long.replace(/^--/, ''));
+    // if an option is not present and Command has a method with the same name
+    // it should not be copied
+    if (typeof cmd[key] !== 'function' && typeof cmd[key] !== 'undefined') {
+      args[key] = cmd[key];
+    }
+  });
+  return args;
 }

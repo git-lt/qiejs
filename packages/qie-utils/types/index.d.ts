@@ -7,4 +7,5 @@ import promiseUtil from './promiseUtil';
 import rulesUtil from './rulesUtil';
 import stringUtil from './stringUtil';
 import urlUtil from './urlUtil';
-export { TimeCountDown, baseUtil, dateUtil, domUtil, numberUtil, promiseUtil, rulesUtil, stringUtil, urlUtil, };
+import uuidUtil from './uuidUtil';
+export { TimeCountDown, baseUtil, dateUtil, domUtil, numberUtil, promiseUtil, rulesUtil, stringUtil, urlUtil, uuidUtil, };

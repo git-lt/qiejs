@@ -13,8 +13,8 @@
     "build": "lerna run build",
     "build:docs": "node ./build/docs.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "release:lerna": "lerna publish --force-publish=* --exact --skip-temp-tag",
-    "release:beta": "lerna publish --force-publish=* --exact --skip-temp-tag  --preid=beta --npm-tag=beta",
+    "release:lerna": "lerna publish --exact --skip-temp-tag",
+    "release:beta": "lerna publish --exact --skip-temp-tag  --preid=beta --npm-tag=beta",
     "release": "npm-run-all build release:lerna && npm run changelog"
   },
   "repository": {
@@ -1601,7 +1601,7 @@
     "math-random": "^1.0.4",
     "markdown-toc": "^1.2.0",
     "mdn-data": "^2.0.4",
-    "mem": "^1.1.0",
+    "mem": "^4.0.0",
     "merge-descriptors": "^1.0.1",
     "media-typer": "^0.3.0",
     "meow": "^4.0.1",
@@ -1896,7 +1896,7 @@
     "uglify-js": "^3.6.0",
     "underscore": "^1.7.0",
     "tmp": "^0.0.33",
-    "underscore.string": "^2.4.0",
+    "underscore.string": "^3.3.5",
     "unicode-match-property-value-ecmascript": "^1.1.0",
     "tiny-lr": "^1.1.1",
     "unicode-property-aliases-ecmascript": "^1.0.5",

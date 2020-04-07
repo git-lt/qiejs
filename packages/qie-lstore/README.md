@@ -13,7 +13,7 @@ npm install @qiejs/qie-lstore
 ```js
 // lstore.js
 
-import LStore from "@qiejs/qie-lstore";
+import LStore from "@qiejs/lstore";
 
 // 定义key的类型
 interface IKeys {

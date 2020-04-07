@@ -21,3 +21,5 @@ var stringUtil_1 = __importDefault(require("./stringUtil"));
 exports.stringUtil = stringUtil_1.default;
 var urlUtil_1 = __importDefault(require("./urlUtil"));
 exports.urlUtil = urlUtil_1.default;
+var uuidUtil_1 = __importDefault(require("./uuidUtil"));
+exports.uuidUtil = uuidUtil_1.default;

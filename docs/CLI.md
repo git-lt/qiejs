@@ -12,6 +12,12 @@ title: 命令行工具
 npm i -g @qiejs/cli
 ```
 
+### 基于模板创建一个项目
+
+```
+qie-cli create <appName>
+```
+
 ### 配置文件初始化
 
 ```

@@ -7,6 +7,7 @@ import promiseUtil from './promiseUtil'
 import rulesUtil from './rulesUtil'
 import stringUtil from './stringUtil'
 import urlUtil from './urlUtil'
+import uuidUtil from './uuidUtil'
 
 export {
   TimeCountDown,
@@ -18,4 +19,5 @@ export {
   rulesUtil,
   stringUtil,
   urlUtil,
+  uuidUtil,
 }
