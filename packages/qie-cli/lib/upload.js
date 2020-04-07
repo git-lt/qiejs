@@ -1,13 +1,19 @@
+const chalk = require('chalk');
 const AliossUpload = require('./util/AliossUpload');
-const { isDirEmpty, getKeys, getQieConfig } = require('./util');
+const { isDirEmpty, getPreset, getQieConfig } = require('./util');
 
 module.exports = async function update(options) {
   const { dir, record, region, bucket, prefix } = options;
 
-  // 检查 .qiejs/.key 中 oss key 是否存在
-  const keys = getKeys();
+  // 检查 .qierc/config 中 oss key 是否存在
+  const keys = getPreset();
   const config = getQieConfig();
   const updateDir = dir || 'zip';
+
+  if (!keys.keyId || !keys.keySecret) {
+    console.log(chalk.red('缺少登录信息，请执行 qie login 初始化'));
+    process.exit(0);
+  }
 
   // 检查 上传目录是否为空
   isDirEmpty(updateDir);
@@ -29,6 +35,7 @@ module.exports = async function update(options) {
     // * 本地要上传的目录名
     dir: updateDir
   };
+
   // 上传资源
   await new AliossUpload(uploadConfig).start();
 

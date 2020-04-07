@@ -2,7 +2,6 @@ const inquirer = require('inquirer');
 const fs = require('fs-extra');
 const figlet = require('figlet');
 const chalk = require('chalk');
-const logger = require('./util/logger');
 const { QIERC_NAME, QIERC_TPL_PATH, QIERC_PATH } = require('./util/constants');
 
 const qus = [
@@ -28,7 +27,7 @@ function copyConfigJs() {
   // 打印 LOGO
   figlet('qie cli', function(err, data) {
     if (err) {
-      logger.error(err);
+      console.error(err);
       process.exit(0);
     }
 
@@ -39,7 +38,7 @@ function copyConfigJs() {
     fs.writeFileSync(QIERC_PATH, contents, 'utf8');
 
     console.log();
-    logger.done(`配置文件 ${QIERC_NAME} 生成成功`);
+    console.log(chalk.green(`✔ 配置文件 ${QIERC_NAME} 已生成`));
     process.exit(0);
   });
 }

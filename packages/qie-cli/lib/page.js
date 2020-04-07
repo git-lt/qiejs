@@ -30,7 +30,7 @@ module.exports = async function create(pageName, options) {
   // 格式验证（略）
   const { react, vue } = options;
   if (!react && !vue) {
-    console.log('请指定生成页面类型，查看帮助: qie-cli page --help');
+    console.log('请指定生成页面类型，查看帮助: qie page --help');
     process.exit(0);
   }
 

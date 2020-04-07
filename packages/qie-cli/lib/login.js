@@ -41,8 +41,8 @@ module.exports = async function login() {
   // 写入系统文件
   try {
     await setPreset(data);
-    logger.done('登录成功 !');
-    logger.log(`登录信息保存于 ${QIEJS_KEY_PATH}`);
+    console.log(`${chalk.green('✔ ')}${chalk.green(`登录成功`)}`);
+    console.log(`    登录信息保存于 ${chalk.cyan.bold(QIEJS_KEY_PATH)}`);
   } catch (e) {
     logger.error(e);
   }

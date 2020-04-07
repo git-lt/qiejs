@@ -44,7 +44,7 @@ module.exports = async function(config) {
   // 检查上传 key
   let key = app[appName] ? app[appName][envType] : '';
   if (!key) {
-    logger.error(`${envName} 的 key 不存在，请执行 'qie-cli login' 生成`);
+    logger.error(`${envName} 的 key 不存在，请执行 'qie login' 生成`);
     process.exit(0);
   }
 
@@ -78,7 +78,7 @@ module.exports = async function(config) {
 
   console.log(JSON.stringify(params, null, 2));
   console.log();
-  const spinner = ora(`正在提交版本信息至 ${chalk.cyan.bold(envName)} ...`).start();
+  const spinner = ora(`正在提交版本至 ${chalk.cyan.bold(envName)}`).start();
 
   try {
     const result = await axios.post(pubApi, params).then(res => res.data);
@@ -86,7 +86,7 @@ module.exports = async function(config) {
     if (result.success) {
       console.log();
       spinner.color = 'green';
-      spinner.succeed(chalk.green(`版本提交成功 🎉`));
+      spinner.succeed(chalk.green(`提交成功 🎉`));
       console.log();
     } else {
       spinner.stop();

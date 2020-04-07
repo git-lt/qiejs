@@ -1,12 +1,13 @@
 #! /usr/bin/env node
 
 const program = require('commander');
-const { getPkgVersion } = require('../lib/util');
+const { getCliVersion } = require('../lib/util');
 
+const version = getCliVersion();
 // 打印版本号
-console.log(`🐧  qie-cli v${getPkgVersion()} \n`);
+console.log(`🐧  qie-cli v${version} \n`);
 
-program.version(getPkgVersion()).usage('<command> [options]');
+program.version(version).usage('<command> [options]');
 
 program
   .command('login')

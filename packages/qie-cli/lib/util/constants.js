@@ -19,6 +19,7 @@ exports.CLI_ROOT_PATH = CLI_ROOT_PATH;
 // 路径
 exports.OS_HOME_PATH = OS_HOME_PATH;
 exports.PACKAGEJSON_PATH = path.join(APP_ROOT_PATH, 'package.json');
+exports.PACKAGEJSON_PATH_CLI = path.join(CLI_ROOT_PATH, 'package.json');
 
 // 项目配置
 exports.QIERC_PATH = path.join(APP_ROOT_PATH, QIERC_NAME);
