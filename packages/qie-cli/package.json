@@ -1,8 +1,7 @@
 {
   "name": "@qiejs/cli",
-  "version": "0.1.1-0",
+  "version": "0.1.2-0",
   "description": "cli tool for qie",
-  "main": "index.js",
   "scripts": {
     "test": "jest",
     "clean": "rimraf dist"
@@ -10,16 +9,15 @@
   "files": [
     "bin",
     "scripts",
-    "src",
-    "templates",
-    "index.js"
+    "lib",
+    "templates"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/git-lt/qiejs.git"
   },
   "bin": {
-    "qie-cli": "bin/qie"
+    "qie": "bin/qie"
   },
   "keywords": [
     "qie",
@@ -31,13 +29,13 @@
   "author": "hz_liutao@qq.com",
   "license": "MIT",
   "dependencies": {
-    "ali-oss": "^6.1.1",
+    "ali-oss": "^6.6.0",
     "axios": "^0.19.0",
     "chalk": "2.4.2",
     "commander": "^2.19.0",
     "cross-spawn": "^6.0.5",
     "download-git-repo": "^3.0.2",
-    "execa": "^4.0.0",
+    "execa": "^7.0.2",
     "figlet": "^1.2.3",
     "fs-extra": "^5.0.0",
     "inquirer": "^5.2.0",
