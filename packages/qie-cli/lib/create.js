@@ -79,13 +79,14 @@ const tplMap = {
 
 module.exports = async function create(projectName, options) {
   const inCurrent = projectName === '.';
+  const cwd = process.cwd();
   const name = inCurrent ? path.relative('../', cwd) : projectName;
 
   // 检查 appname 格式是否正确、是否存在同名目录, 如果不合法，引导输入合法名称
   projectName = await checkAppName(name, inCurrent);
 
   // 目标目录
-  const targetDir = path.resolve(process.cwd(), projectName || '.');
+  const targetDir = path.resolve(cwd, inCurrent ? '.' : projectName);
 
   // 获取 项目模板名称 与 项目介绍
   const { template, description = '' } = await inquirer.prompt(proInfoPmt);
@@ -121,7 +122,7 @@ module.exports = async function create(projectName, options) {
       const installCmd = packageManager === 'yarn' ? 'yarn' : `${packageManager} install`;
       installSpinner = ora(`${chalk.cyan.bold(installCmd)} 正在安装依赖, 请稍等...`).start();
       await run(installCmd, null, targetDir);
-      installSpinner.succeed('依赖安装完成');
+      installSpinner.succeed(chalk.green('依赖安装完成'));
     } catch (e) {
       installSpinner.fail(chalk.red('依赖安装失败，请手动安装'));
     }
@@ -176,7 +177,6 @@ async function downloadTemplate(api, targetPath) {
   let loading = ora(`正在从 ${api.replace('direct:', '')} 拉取模板...`).start();
   return new Promise((resolve, reject) => {
     downloadGit(api, targetPath, { clone: true }, async err => {
-      console.log(err);
       if (err) {
         loading.color = 'red';
         loading.fail(chalk.red('模板拉取失败!'));

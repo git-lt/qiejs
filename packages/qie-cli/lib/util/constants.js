@@ -32,3 +32,5 @@ exports.QIEJS_KEY_PATH = path.join(OS_HOME_PATH, `${QIEJS_DIR_NAME}/${QIEJS_KEY_
 // 页面模板路径
 exports.PAGE_TPL_REACT = path.join(CLI_ROOT_PATH, 'templates/page-react');
 exports.PAGE_TPL_VUE = path.join(CLI_ROOT_PATH, 'templates/page-vue');
+
+exports.REG_DOMAIN = /([a-z0-9][a-z0-9\-]*?\.(?:com|cn|net|org|gov|info|la|cc|co)(?:\.(?:cn|jp))?)$/;

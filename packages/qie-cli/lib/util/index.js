@@ -5,7 +5,7 @@ const ora = require('ora');
 const execa = require('execa');
 const chalk = require('chalk');
 
-const { APP_ROOT_PATH, QIERC_PATH, PACKAGEJSON_PATH, PACKAGEJSON_PATH_CLI, QIEJS_KEY_PATH } = require('./constants');
+const { APP_ROOT_PATH, QIERC_PATH, PACKAGEJSON_PATH, PACKAGEJSON_PATH_CLI, QIEJS_KEY_PATH, QIERC_NAME } = require('./constants');
 
 function getPackageJson() {
   try {
@@ -19,8 +19,8 @@ function getPackageJson() {
 
 exports.getPackageJson = getPackageJson;
 
-exports.isString = v => typeof v === 'string';
-exports.resolveAppPath = name => path.resolve(APP_ROOT_PATH, name);
+exports.isString = (v) => typeof v === 'string';
+exports.resolveAppPath = (name) => path.resolve(APP_ROOT_PATH, name);
 
 exports.getCliVersion = () => {
   return require(PACKAGEJSON_PATH_CLI).version;
@@ -57,7 +57,7 @@ exports.getPreset = async () => {
   return data || {};
 };
 
-exports.setPreset = async jsonData => {
+exports.setPreset = async (jsonData) => {
   return await fs.writeJson(QIEJS_KEY_PATH, jsonData, { spaces: 2 });
 };
 
@@ -78,18 +78,8 @@ exports.getQieConfig = () => {
   }
 };
 
-// 检查是配置文件中的数据
-exports.checkConfigProp = obj => {
-  return function(key) {
-    if (obj[key]) return true;
-
-    logger.warn(`请在 ${CONFIG_FILE_NAME} 中设置 ${key}`);
-    process.exit(0);
-  };
-};
-
 // 是否为空的目录
-exports.isDirEmpty = dirName => {
+exports.isDirEmpty = (dirName) => {
   const dirPath = path.join(APP_ROOT_PATH, dirName);
 
   if (!fs.existsSync(dirPath)) {
@@ -106,17 +96,17 @@ exports.isDirEmpty = dirName => {
 };
 
 // 获取目录中第一个文件
-exports.getFirstFileName = dirName => {
+exports.getFirstFileName = (dirName) => {
   const dirPath = path.join(APP_ROOT_PATH, dirName);
   const files = fs.readdirSync(dirPath);
   return files[0] || '';
 };
 
-exports.checkConfigProp = obj => {
-  return function(key) {
+exports.checkConfigProp = (obj) => {
+  return function (key) {
     if (obj[key] !== '' || typeof obj[key] !== 'undefined') return true;
 
-    logger.warn(`缺少配置项: ${key}`);
+    logger.error(`请在 ${QIERC_NAME} 中设置 ${key}`);
     process.exit(0);
   };
 };
@@ -138,7 +128,7 @@ exports.run = async (command, args, context) => {
 };
 
 // 检查包管理器是否可用
-exports.canUseCmd = async pmType => {
+exports.canUseCmd = async (pmType) => {
   const validate = ['cnpm', 'yarn', 'npm', 'git'].includes(pmType);
   if (validate) {
     try {

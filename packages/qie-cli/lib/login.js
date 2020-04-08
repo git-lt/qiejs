@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const logger = require('./util/logger');
+const chalk = require('chalk');
 const { QIEJS_KEY_PATH } = require('./util/constants');
 const { getAppName, getPreset, setPreset } = require('./util');
 
@@ -44,7 +44,7 @@ module.exports = async function login() {
     console.log(`${chalk.green('✔ ')}${chalk.green(`登录成功`)}`);
     console.log(`    登录信息保存于 ${chalk.cyan.bold(QIEJS_KEY_PATH)}`);
   } catch (e) {
-    logger.error(e);
+    console.log(chalk.red(e.message || '登录失败'));
   }
 
   process.exit(0);

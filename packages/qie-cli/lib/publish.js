@@ -3,28 +3,18 @@ const axios = require('axios');
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 const logger = require('./util/logger');
-const { getFirstFileName, getPkgVersion, getAppName, checkConfigProp, loadCmd } = require('./util');
+const { getPkgVersion, checkConfigProp, loadCmd } = require('./util');
 const { QIERC_NAME, OS_USER_NAME } = require('./util/constants');
 
 axios.defaults.timeout = 30 * 1000;
 axios.defaults.responseType = 'json';
 
-module.exports = async function(config) {
-  const { type, env, dir, prefix, cdnBaseUrl, app } = config;
+module.exports = async function (config) {
+  // app: {dev, pro} keys
+  const { type, env, prefix, cdnBaseUrl, app, appName, envName, fileName } = config;
 
   const check = checkConfigProp(config);
   check('type') && check('env') && check('cdnBaseUrl');
-
-  const appName = getAppName();
-  const fileName = getFirstFileName(dir);
-  const regDomain = /([a-z0-9][a-z0-9\-]*?\.(?:com|cn|net|org|gov|info|la|cc|co)(?:\.(?:cn|jp))?)$/;
-
-  // 检查域名是否正确
-  const envName = fileName.split('__')[0];
-  if (!regDomain.test(envName)) {
-    logger.error(`${envName} 格式错误，例：www.xxx.com / dev.xxx.com`);
-    process.exit(0);
-  }
 
   // 是否有 env 配置
   if (!Array.isArray(env) || !env.length) {
@@ -33,7 +23,7 @@ module.exports = async function(config) {
   }
 
   // 检查环境配置 env: { pubAPi,type, name }
-  const envInfo = env.filter(v => v.name === envName)[0];
+  const envInfo = env.filter((v) => v.name === envName)[0];
   if (!envInfo || !envInfo.pubApi || !envInfo.type) {
     logger.error(`${QIERC_NAME} 缺少 ${envName} 的环境配置`);
     process.exit(0);
@@ -42,9 +32,9 @@ module.exports = async function(config) {
   const { type: envType, pubApi } = envInfo;
 
   // 检查上传 key
-  let key = app[appName] ? app[appName][envType] : '';
+  let key = app[envType] || '';
   if (!key) {
-    logger.error(`${envName} 的 key 不存在，请执行 'qie login' 生成`);
+    logger.error(`${appName} 的 key 不存在，请执行 'qie login' 生成`);
     process.exit(0);
   }
 
@@ -73,7 +63,7 @@ module.exports = async function(config) {
     desc: desc.trim(),
     envName,
     version,
-    userName: OS_USER_NAME
+    userName: OS_USER_NAME,
   };
 
   console.log(JSON.stringify(params, null, 2));
@@ -81,7 +71,7 @@ module.exports = async function(config) {
   const spinner = ora(`正在提交版本至 ${chalk.cyan.bold(envName)}`).start();
 
   try {
-    const result = await axios.post(pubApi, params).then(res => res.data);
+    const result = await axios.post(pubApi, params).then((res) => res.data);
 
     if (result.success) {
       console.log();

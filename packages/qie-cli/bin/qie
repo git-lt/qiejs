@@ -1,11 +1,10 @@
 #! /usr/bin/env node
-
 const program = require('commander');
 const { getCliVersion } = require('../lib/util');
-
 const version = getCliVersion();
+
 // 打印版本号
-console.log(`🐧  qie-cli v${version} \n`);
+console.log(`🐧  Qie v${version} \n`);
 
 program.version(version).usage('<command> [options]');
 
@@ -48,7 +47,7 @@ program
   .option('-g --region <region>', 'oss region')
   .option('-b --bucket <bucket>', 'oss bucket')
   .option('-p --prefix <prefix>', 'oss prefix')
-  .action(options => {
+  .action((options) => {
     require('../lib/upload')(cleanArgs(options));
   });
 
@@ -65,7 +64,7 @@ function camelize(str) {
 
 function cleanArgs(cmd) {
   const args = {};
-  cmd.options.forEach(o => {
+  cmd.options.forEach((o) => {
     const key = camelize(o.long.replace(/^--/, ''));
     // if an option is not present and Command has a method with the same name
     // it should not be copied
