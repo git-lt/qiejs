@@ -1,6 +1,6 @@
 {
   "name": "@qiejs/utils",
-  "version": "0.0.55",
+  "version": "0.0.56-0",
   "description": "utils for qie projects",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
@@ -9,6 +9,7 @@
     "types"
   ],
   "scripts": {
+    "test": "jest",
     "build": "npm run update-index && tsc",
     "dev": "tsc -w",
     "update-index": "node scripts/update-index.js"
