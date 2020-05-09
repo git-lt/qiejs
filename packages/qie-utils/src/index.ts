@@ -1,3 +1,4 @@
+import CountDown from './CountDown'
 import TimeCountDown from './TimeCountDown'
 import baseUtil from './baseUtil'
 import dateUtil from './dateUtil'
@@ -10,6 +11,7 @@ import urlUtil from './urlUtil'
 import uuidUtil from './uuidUtil'
 
 export {
+  CountDown,
   TimeCountDown,
   baseUtil,
   dateUtil,

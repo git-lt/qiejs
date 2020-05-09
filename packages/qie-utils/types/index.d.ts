@@ -1,3 +1,4 @@
+import CountDown from './CountDown';
 import TimeCountDown from './TimeCountDown';
 import baseUtil from './baseUtil';
 import dateUtil from './dateUtil';
@@ -8,4 +9,4 @@ import rulesUtil from './rulesUtil';
 import stringUtil from './stringUtil';
 import urlUtil from './urlUtil';
 import uuidUtil from './uuidUtil';
-export { TimeCountDown, baseUtil, dateUtil, domUtil, numberUtil, promiseUtil, rulesUtil, stringUtil, urlUtil, uuidUtil, };
+export { CountDown, TimeCountDown, baseUtil, dateUtil, domUtil, numberUtil, promiseUtil, rulesUtil, stringUtil, urlUtil, uuidUtil, };

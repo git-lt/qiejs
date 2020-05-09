@@ -24,7 +24,7 @@ declare function formatISOTime(date: number | string | Date): string;
  */
 declare function formatISODateTime(date: number | string | Date): string;
 /**
- * 确保等到一个时间对象
+ * 确保得到一个时间对象
  * @param date
  */
 declare function insureDate(date: number | string | Date): Date;

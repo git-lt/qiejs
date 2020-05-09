@@ -1,4 +1,4 @@
-import url from "url-parse";
+import url from 'url-parse';
 /**
  * 获取url中查询参数的值
  * @param key 获取对应key的值，不传则获取所有
@@ -46,6 +46,28 @@ declare function obj2pms(obj: any): string;
  * @example buildUrl('/login', {from: 'home'}) => '/login?from=home'
  */
 declare function buildUrl(path: string, params: any): string;
+interface RouterOption {
+    path: string;
+    query?: Record<string, any>;
+}
+/**
+ * location.href
+ * @param options {path: '', query: {}} | url: string
+ * @example push('/login') 或 push('/login',{name: 'a'})
+ */
+declare function push(options: RouterOption | string): void;
+/**
+ * location.replace
+ * @param options {path: '', query: {}} | url: string
+ * @example replace('/login') 或 replace('/login',{name: 'a'})
+ */
+declare function replace(options: RouterOption | string): void;
+/**
+ * history.go
+ * @param num
+ * @example 回退：go(-1)
+ */
+declare function go(num: number): void;
 declare const _default: {
     url: {
         (address: string, parser?: boolean | url.QueryParser): url;
@@ -71,5 +93,8 @@ declare const _default: {
     updateParam: typeof updateParam;
     obj2pms: typeof obj2pms;
     buildUrl: typeof buildUrl;
+    push: typeof push;
+    replace: typeof replace;
+    go: typeof go;
 };
 export default _default;

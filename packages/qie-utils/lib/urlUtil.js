@@ -24,9 +24,9 @@ function resolve(href, path) {
     return url_parse_1.default(path, href).pathname;
 }
 function urlToList(url) {
-    var urllist = url.split("/").filter(function (i) { return i; });
+    var urllist = url.split('/').filter(function (i) { return i; });
     return urllist.map(function (_item, index) {
-        return "/" + urllist.slice(0, index + 1).join("/");
+        return "/" + urllist.slice(0, index + 1).join('/');
     });
 }
 /**
@@ -37,7 +37,7 @@ function urlToList(url) {
 function removeParam(key, path) {
     var parse = url_parse_1.default(path || window.location.href, true);
     delete parse.query[key];
-    parse.set("query", parse.query);
+    parse.set('query', parse.query);
     return parse.toString();
 }
 /**
@@ -48,7 +48,7 @@ function removeParam(key, path) {
 function addParam(key, value, path) {
     var parse = url_parse_1.default(path || window.location.href, true);
     parse.query[key] = value;
-    parse.set("query", parse.query);
+    parse.set('query', parse.query);
     return parse.toString();
 }
 /**
@@ -67,7 +67,7 @@ function updateParam(key, value, path) {
 function obj2pms(obj) {
     return Object.keys(obj)
         .map(function (v) { return v + "=" + obj[v]; })
-        .join("&");
+        .join('&');
 }
 /**
  * 构建跳转链接
@@ -76,10 +76,46 @@ function obj2pms(obj) {
  * @example buildUrl('/login', {from: 'home'}) => '/login?from=home'
  */
 function buildUrl(path, params) {
-    var useAnd = path.indexOf("?") > -1;
+    var useAnd = path.indexOf('?') > -1;
     var pms = obj2pms(params);
-    var url = "" + path + (useAnd ? "&" : "?") + pms;
+    var url = "" + path + (useAnd ? '&' : '?') + pms;
     return url;
+}
+function createUrl(options) {
+    var url = '';
+    if (typeof options === 'string') {
+        url = options;
+    }
+    else {
+        url = buildUrl(options.path, options.query || {});
+    }
+    return url;
+}
+/**
+ * location.href
+ * @param options {path: '', query: {}} | url: string
+ * @example push('/login') 或 push('/login',{name: 'a'})
+ */
+function push(options) {
+    var url = createUrl(options);
+    window.location.href = url;
+}
+/**
+ * location.replace
+ * @param options {path: '', query: {}} | url: string
+ * @example replace('/login') 或 replace('/login',{name: 'a'})
+ */
+function replace(options) {
+    var url = createUrl(options);
+    window.location.replace(url);
+}
+/**
+ * history.go
+ * @param num
+ * @example 回退：go(-1)
+ */
+function go(num) {
+    window.history.go(num);
 }
 exports.default = {
     url: url_parse_1.default,
@@ -90,5 +126,8 @@ exports.default = {
     addParam: addParam,
     updateParam: updateParam,
     obj2pms: obj2pms,
-    buildUrl: buildUrl
+    buildUrl: buildUrl,
+    push: push,
+    replace: replace,
+    go: go,
 };

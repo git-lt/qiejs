@@ -1,13 +1,27 @@
-const scrollTop = (el: HTMLElement | Window, from = 0, to: number, duration = 500, endCallback: Function) => {
-  if (!window.requestAnimationFrame) {
-    window.requestAnimationFrame =
-      window.webkitRequestAnimationFrame ||
-      window.mozRequestAnimationFrame ||
-      window.msRequestAnimationFrame ||
-      function(callback: FrameRequestCallback) {
-        return window.setTimeout(callback, 1000 / 60);
-      };
-  }
+let prev = Date.now();
+const root = (typeof window === 'undefined' ? global : window) as Window;
+
+function fallback(fn: FrameRequestCallback): number {
+  const curr = Date.now();
+  const ms = Math.max(0, 16 - (curr - prev));
+  const id = setTimeout(fn, ms);
+  prev = curr + ms;
+  return id;
+}
+
+const iRaf = root.requestAnimationFrame || fallback;
+
+const iCancel = root.cancelAnimationFrame || root.clearTimeout;
+
+export function raf(fn: FrameRequestCallback): number {
+  return iRaf.call(root, fn);
+}
+
+export function cancelRaf(id: number) {
+  iCancel.call(root, id);
+}
+
+export function scrollTop(el: HTMLElement | Window, from = 0, to: number, duration = 500, endCallback: Function) {
   const difference = Math.abs(from - to);
   const step = Math.ceil((difference / duration) * 50);
 
@@ -22,16 +36,18 @@ const scrollTop = (el: HTMLElement | Window, from = 0, to: number, duration = 50
       d = start - step < end ? end : start - step;
     }
 
-    if (el === window) {
-      window.scrollTo(d, d);
+    if (el === root) {
+      root.scrollTo(d, d);
     } else {
       (el as HTMLElement).scrollTop = d;
     }
-    window.requestAnimationFrame(() => scroll(d, end, step));
+    raf(() => scroll(d, end, step));
   };
   scroll(from, to, step);
-};
+}
 
 export default {
-  scrollTop
+  scrollTop,
+  raf,
+  cancelRaf,
 };

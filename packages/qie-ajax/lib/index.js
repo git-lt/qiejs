@@ -86,7 +86,7 @@ var Request = /** @class */ (function () {
                 method: method,
                 params: params, data: IS_GET ? {} : data, paramsSerializer: function (params) {
                     return qs_1.default.stringify(params, { indices: false });
-                }, headers: __assign({}, _this.axios.defaults.headers, REQUEST_HEADERS[dataType]), cancelToken: _this.cancelSource.token }, others);
+                }, headers: __assign(__assign({}, _this.axios.defaults.headers), REQUEST_HEADERS[dataType]), cancelToken: _this.cancelSource.token }, others);
             var requestPromise = _this.axios(reqConfig);
             var showLoadingPromise = new Promise(function (resolve) { return setTimeout(function () { return resolve(_this.loadingDelay); }, _this.loadingDelay); });
             // 如果请求超过 260ms 则显示loading

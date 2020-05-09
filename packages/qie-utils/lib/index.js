@@ -3,6 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var CountDown_1 = __importDefault(require("./CountDown"));
+exports.CountDown = CountDown_1.default;
 var TimeCountDown_1 = __importDefault(require("./TimeCountDown"));
 exports.TimeCountDown = TimeCountDown_1.default;
 var baseUtil_1 = __importDefault(require("./baseUtil"));
