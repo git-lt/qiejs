@@ -1,6 +1,6 @@
 import { raf, cancelRaf } from './domUtil';
 
-type TimeData = {
+export type TimeData = {
   days: number;
   hours: number;
   minutes: number;
@@ -108,7 +108,7 @@ function isSameSecond(time1: number, time2: number): boolean {
   return Math.floor(time1 / 1000) === Math.floor(time2 / 1000);
 }
 
-interface CountDownOption {
+export interface CountDownOption {
   // 剩余时长毫秒数
   time: number;
   // 时间格式 天：小时：分：秒 DD:HH:mm:ss:SSS

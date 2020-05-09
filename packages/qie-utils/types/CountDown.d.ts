@@ -1,11 +1,11 @@
-declare type TimeData = {
+export declare type TimeData = {
     days: number;
     hours: number;
     minutes: number;
     seconds: number;
     milliseconds: number;
 };
-interface CountDownOption {
+export interface CountDownOption {
     time: number;
     format?: string;
     autoStart?: boolean;
