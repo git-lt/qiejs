@@ -1,0 +1,30 @@
+{
+  "name": "@qiejs/wxjssdk",
+  "version": "0.0.1",
+  "description": "wechat jssdk ts",
+  "main": "lib/index.js",
+  "types": "types/index.d.ts",
+  "files": [
+    "lib",
+    "types"
+  ],
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/git-lt/qiejs.git"
+  },
+  "keywords": [
+    "utils"
+  ],
+  "author": "LIUTAO <hz_liutao@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "wechat-jssdk-ts": "^1.4.0-dev.2"
+  }
+}

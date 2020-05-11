@@ -140,7 +140,7 @@ function go(num: number) {
  * @param appId
  * @example if(!sessionStorage.getItem('code')) doWxAuth('xxxx')
  */
-function doWxAuth(appId: string) {
+function doWxAuth(appid: string) {
   const code = getUrlParam('code');
   if (code) {
     window.sessionStorage.setItem('code', code);
@@ -150,7 +150,7 @@ function doWxAuth(appId: string) {
   }
 
   const pms = {
-    appId,
+    appid,
     redirect_uri: encodeURIComponent(window.location.href),
     response_type: 'code',
     connect_redirect: 1,

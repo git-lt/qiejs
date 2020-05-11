@@ -72,7 +72,7 @@ declare function go(num: number): void;
  * @param appId
  * @example if(!sessionStorage.getItem('code')) doWxAuth('xxxx')
  */
-declare function doWxAuth(appId: string): void;
+declare function doWxAuth(appid: string): void;
 declare const _default: {
     url: {
         (address: string, parser?: boolean | url.QueryParser): url;
