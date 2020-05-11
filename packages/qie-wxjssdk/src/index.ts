@@ -16,6 +16,11 @@ const readyAsync = (config: wx.ConfigOptions) => {
   });
 };
 
+/**
+ * 微信分享
+ * @param types 类型 ['timeline', 'appMessage']
+ * @param option
+ */
 const shareAsync = (types: ShareType[], option: wx.shareDataOptions) => {
   const wxShareMessage = wx.onMenuShareAppMessage || wx.updateAppMessageShareData;
   const wxShareTimeline = wx.onMenuShareTimeline || wx.updateTimelineShareData;

@@ -27,6 +27,11 @@ var readyAsync = function (config) {
         wechat_jssdk_ts_1.default.error(reject);
     });
 };
+/**
+ * 微信分享
+ * @param types 类型 ['timeline', 'appMessage']
+ * @param option
+ */
 var shareAsync = function (types, option) {
     var wxShareMessage = wechat_jssdk_ts_1.default.onMenuShareAppMessage || wechat_jssdk_ts_1.default.updateAppMessageShareData;
     var wxShareTimeline = wechat_jssdk_ts_1.default.onMenuShareTimeline || wechat_jssdk_ts_1.default.updateTimelineShareData;

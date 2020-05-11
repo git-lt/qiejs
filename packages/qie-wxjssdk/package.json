@@ -1,6 +1,6 @@
 {
   "name": "@qiejs/wxjssdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "wechat jssdk ts",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
