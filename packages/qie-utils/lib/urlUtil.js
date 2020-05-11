@@ -5,11 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // https://github.com/unshiftio/url-parse/blob/master/test/test.js
 var url_parse_1 = __importDefault(require("url-parse"));
-/**
- * 获取url中查询参数的值
- * @param key 获取对应key的值，不传则获取所有
- * @example getUrlParam('name') // 'aaa'
- */
 function getUrlParam(key, path) {
     var query = url_parse_1.default(path || window.location.href, true).query;
     return !!key ? query[key] : query;
@@ -31,33 +26,37 @@ function urlToList(url) {
 }
 /**
  * 删除 查询参数
- * @param path
- * @param key
+ * @param keys 要删除的 key 的集合
+ * @param path 地址，默认为当前地址
  */
-function removeParam(key, path) {
+function removeParam(keys, path) {
     var parse = url_parse_1.default(path || window.location.href, true);
-    delete parse.query[key];
+    keys.forEach(function (v) {
+        delete parse.query[v];
+    });
     parse.set('query', parse.query);
     return parse.toString();
 }
 /**
  * 添加 查询参数
- * @param path
- * @param key
+ * @param params 要添加的键值对
+ * @param path 地址，默认为当前地址
  */
-function addParam(key, value, path) {
+function addParam(params, path) {
     var parse = url_parse_1.default(path || window.location.href, true);
-    parse.query[key] = value;
+    Object.keys(params).forEach(function (v) {
+        parse.query[v] = params[v];
+    });
     parse.set('query', parse.query);
     return parse.toString();
 }
 /**
  * 更新 查询参数
- * @param path
- * @param key
+ * @param params 要添加的键值对
+ * @param path 地址，默认为当前地址
  */
-function updateParam(key, value, path) {
-    return addParam(key, value, path);
+function updateParam(params, path) {
+    return addParam(params, path);
 }
 /**
  * 对象转URL参数
@@ -117,6 +116,31 @@ function replace(options) {
 function go(num) {
     window.history.go(num);
 }
+/**
+ * 微信网页授权
+ * @param appId
+ * @example if(!sessionStorage.getItem('code')) doWxAuth('xxxx')
+ */
+function doWxAuth(appId) {
+    var code = getUrlParam('code');
+    if (code) {
+        window.sessionStorage.setItem('code', code);
+        var originUrl = removeParam(['code', 'state']);
+        window.location.replace(originUrl);
+        return;
+    }
+    var pms = {
+        appId: appId,
+        redirect_uri: encodeURIComponent(window.location.href),
+        response_type: 'code',
+        connect_redirect: 1,
+        state: 'STATE',
+        scope: 'snsapi_userinfo',
+    };
+    var authPath = 'https://open.weixin.qq.com/connect/oauth2/authorize';
+    var url = buildUrl(authPath, pms) + '#wechat_redirect';
+    window.location.replace(url);
+}
 exports.default = {
     url: url_parse_1.default,
     getUrlParam: getUrlParam,
@@ -130,4 +154,5 @@ exports.default = {
     push: push,
     replace: replace,
     go: go,
+    doWxAuth: doWxAuth,
 };

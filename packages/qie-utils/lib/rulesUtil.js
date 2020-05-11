@@ -1,5 +1,6 @@
 "use strict";
 // https://juejin.im/post/5d245d4151882555300feb77#heading-27
+// https://any86.github.io/any-rule/
 Object.defineProperty(exports, "__esModule", { value: true });
 var regMap = {
     // 手机号
@@ -25,22 +26,22 @@ var regMap = {
     // url地址
     url: /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i,
     // 是否有空格, 中间或两头有空格都算
-    hasSpace: /\s/
+    hasSpace: /\s/,
 };
 var rules = {
-    phone: { pattern: regMap.phone, message: "请输入正确的手机号码" },
-    price: { pattern: regMap.price, message: "请输入最多两位小数的金额" },
-    idCard: { pattern: regMap.idCard, message: "身份证格式不正确" },
-    chinese: { pattern: regMap.chinese, message: "请输入中文字符" },
+    phone: { pattern: regMap.phone, message: '请输入正确的手机号码' },
+    price: { pattern: regMap.price, message: '请输入最多两位小数的金额' },
+    idCard: { pattern: regMap.idCard, message: '身份证格式不正确' },
+    chinese: { pattern: regMap.chinese, message: '请输入中文字符' },
     url: {
         pattern: regMap.url,
-        message: "请输入以 http: 或 https: 开头的链接地址"
+        message: '请输入以 http: 或 https: 开头的链接地址',
     },
     numberOrLetter: {
         pattern: regMap.numberOrLetter,
-        message: "请输入数字或字母"
+        message: '请输入数字或字母',
     },
     // 大于0的整数
-    gtZeroInt: { pattern: regMap.gtZeroInt, message: "请输入大于0的整数" }
+    gtZeroInt: { pattern: regMap.gtZeroInt, message: '请输入大于0的整数' },
 };
 exports.default = { regMap: regMap, rules: rules };

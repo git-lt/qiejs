@@ -6,6 +6,8 @@ import url from 'url-parse';
  * @param key 获取对应key的值，不传则获取所有
  * @example getUrlParam('name') // 'aaa'
  */
+function getUrlParam(key: string, path?: string): string;
+function getUrlParam(key?: string, path?: string): string | Record<string, string>;
 function getUrlParam(key?: string, path?: string) {
   const query = url(path || window.location.href, true).query;
   return !!key ? query[key] : query;
@@ -30,35 +32,39 @@ function urlToList(url: string): string[] {
 
 /**
  * 删除 查询参数
- * @param path
- * @param key
+ * @param keys 要删除的 key 的集合
+ * @param path 地址，默认为当前地址
  */
-function removeParam(key: string, path?: string): string {
+function removeParam(keys: string[], path?: string): string {
   const parse = url(path || window.location.href, true);
-  delete parse.query[key];
+  keys.forEach((v) => {
+    delete parse.query[v];
+  });
   parse.set('query', parse.query);
   return parse.toString();
 }
 
 /**
  * 添加 查询参数
- * @param path
- * @param key
+ * @param params 要添加的键值对
+ * @param path 地址，默认为当前地址
  */
-function addParam(key: string, value: string, path?: string): string {
+function addParam(params: Record<string, any>, path?: string): string {
   const parse = url(path || window.location.href, true);
-  parse.query[key] = value;
+  Object.keys(params).forEach((v) => {
+    parse.query[v] = params[v];
+  });
   parse.set('query', parse.query);
   return parse.toString();
 }
 
 /**
  * 更新 查询参数
- * @param path
- * @param key
+ * @param params 要添加的键值对
+ * @param path 地址，默认为当前地址
  */
-function updateParam(key: string, value: string, path?: string): string {
-  return addParam(key, value, path);
+function updateParam(params: Record<string, any>, path?: string): string {
+  return addParam(params, path);
 }
 
 /**
@@ -129,6 +135,34 @@ function go(num: number) {
   window.history.go(num);
 }
 
+/**
+ * 微信网页授权
+ * @param appId
+ * @example if(!sessionStorage.getItem('code')) doWxAuth('xxxx')
+ */
+function doWxAuth(appId: string) {
+  const code = getUrlParam('code');
+  if (code) {
+    window.sessionStorage.setItem('code', code);
+    const originUrl = removeParam(['code', 'state']);
+    window.location.replace(originUrl);
+    return;
+  }
+
+  const pms = {
+    appId,
+    redirect_uri: encodeURIComponent(window.location.href),
+    response_type: 'code',
+    connect_redirect: 1,
+    state: 'STATE',
+    scope: 'snsapi_userinfo',
+  };
+
+  const authPath = 'https://open.weixin.qq.com/connect/oauth2/authorize';
+  const url = buildUrl(authPath, pms) + '#wechat_redirect';
+  window.location.replace(url);
+}
+
 export default {
   url,
   getUrlParam,
@@ -142,4 +176,5 @@ export default {
   push,
   replace,
   go,
+  doWxAuth,
 };

@@ -4,9 +4,8 @@ import url from 'url-parse';
  * @param key 获取对应key的值，不传则获取所有
  * @example getUrlParam('name') // 'aaa'
  */
-declare function getUrlParam(key?: string, path?: string): string | {
-    [key: string]: string;
-};
+declare function getUrlParam(key: string, path?: string): string;
+declare function getUrlParam(key?: string, path?: string): string | Record<string, string>;
 /**
  * url 拼接
  * @param href url地址
@@ -17,22 +16,22 @@ declare function resolve(href: string, path: string): string;
 declare function urlToList(url: string): string[];
 /**
  * 删除 查询参数
- * @param path
- * @param key
+ * @param keys 要删除的 key 的集合
+ * @param path 地址，默认为当前地址
  */
-declare function removeParam(key: string, path?: string): string;
+declare function removeParam(keys: string[], path?: string): string;
 /**
  * 添加 查询参数
- * @param path
- * @param key
+ * @param params 要添加的键值对
+ * @param path 地址，默认为当前地址
  */
-declare function addParam(key: string, value: string, path?: string): string;
+declare function addParam(params: Record<string, any>, path?: string): string;
 /**
  * 更新 查询参数
- * @param path
- * @param key
+ * @param params 要添加的键值对
+ * @param path 地址，默认为当前地址
  */
-declare function updateParam(key: string, value: string, path?: string): string;
+declare function updateParam(params: Record<string, any>, path?: string): string;
 /**
  * 对象转URL参数
  * @param obj JSON对象
@@ -68,6 +67,12 @@ declare function replace(options: RouterOption | string): void;
  * @example 回退：go(-1)
  */
 declare function go(num: number): void;
+/**
+ * 微信网页授权
+ * @param appId
+ * @example if(!sessionStorage.getItem('code')) doWxAuth('xxxx')
+ */
+declare function doWxAuth(appId: string): void;
 declare const _default: {
     url: {
         (address: string, parser?: boolean | url.QueryParser): url;
@@ -96,5 +101,6 @@ declare const _default: {
     push: typeof push;
     replace: typeof replace;
     go: typeof go;
+    doWxAuth: typeof doWxAuth;
 };
 export default _default;
