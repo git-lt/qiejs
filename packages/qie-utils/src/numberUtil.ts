@@ -105,11 +105,11 @@ function formatNum(v: number, formatStr: string) {
  * @param x
  * @param y
  */
-function add(x: number, y: number): string {
+function add(x: number, y: number): number {
   return numeral(x)
     .clone()
     .add(y)
-    .toString();
+    .value();
 }
 
 /**
@@ -117,11 +117,11 @@ function add(x: number, y: number): string {
  * @param x
  * @param y
  */
-function sub(x: number, y: number): string {
+function sub(x: number, y: number): number {
   return numeral(x)
     .clone()
     .subtract(y)
-    .toString();
+    .value();
 }
 
 /**
@@ -129,11 +129,11 @@ function sub(x: number, y: number): string {
  * @param x
  * @param y
  */
-function mul(x: number, y: number): string {
+function mul(x: number, y: number): number {
   return numeral(x)
     .clone()
     .multiply(y)
-    .toString();
+    .value();
 }
 
 /**
@@ -141,11 +141,11 @@ function mul(x: number, y: number): string {
  * @param x
  * @param y
  */
-function div(x: number, y: number): string {
+function div(x: number, y: number): number {
   return numeral(x)
     .clone()
     .divide(y)
-    .toString();
+    .value();
 }
 
 export default {

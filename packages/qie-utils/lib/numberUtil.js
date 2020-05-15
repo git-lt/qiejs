@@ -109,7 +109,7 @@ function add(x, y) {
     return numeral_1.default(x)
         .clone()
         .add(y)
-        .toString();
+        .value();
 }
 /**
  * 减
@@ -120,7 +120,7 @@ function sub(x, y) {
     return numeral_1.default(x)
         .clone()
         .subtract(y)
-        .toString();
+        .value();
 }
 /**
  * 乘
@@ -131,7 +131,7 @@ function mul(x, y) {
     return numeral_1.default(x)
         .clone()
         .multiply(y)
-        .toString();
+        .value();
 }
 /**
  * 除
@@ -142,7 +142,7 @@ function div(x, y) {
     return numeral_1.default(x)
         .clone()
         .divide(y)
-        .toString();
+        .value();
 }
 exports.default = {
     randomNum: randomNum,

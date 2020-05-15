@@ -66,25 +66,25 @@ declare function formatNum(v: number, formatStr: string): string;
  * @param x
  * @param y
  */
-declare function add(x: number, y: number): string;
+declare function add(x: number, y: number): number;
 /**
  * 减
  * @param x
  * @param y
  */
-declare function sub(x: number, y: number): string;
+declare function sub(x: number, y: number): number;
 /**
  * 乘
  * @param x
  * @param y
  */
-declare function mul(x: number, y: number): string;
+declare function mul(x: number, y: number): number;
 /**
  * 除
  * @param x
  * @param y
  */
-declare function div(x: number, y: number): string;
+declare function div(x: number, y: number): number;
 declare const _default: {
     randomNum: typeof randomNum;
     toFixedNum: typeof toFixedNum;
