@@ -9,7 +9,9 @@ import url from 'url-parse';
 function getUrlParam(key: string, path?: string): string;
 function getUrlParam(key?: string, path?: string): string | Record<string, string>;
 function getUrlParam(key?: string, path?: string) {
-  const query = url(path || window.location.href, true).query;
+  let p = path || window.location.href;
+  p = p.indexOf('#') > -1 ? p.split('#')[1] : p;
+  const query = url(p, true).query;
   return !!key ? query[key] : query;
 }
 
@@ -19,8 +21,8 @@ function getUrlParam(key?: string, path?: string) {
  * @param path 路径
  * @example resolve('http://foo.com/a/', 'b/c') => http://foo.com/a/b/c
  */
-function resolve(href: string, path: string) {
-  return url(path, href).pathname;
+function resolve(href: string, path: string): string {
+  return url(path, href).href;
 }
 
 function urlToList(url: string): string[] {
@@ -31,7 +33,7 @@ function urlToList(url: string): string[] {
 }
 
 /**
- * 删除 查询参数
+ * 删除 查询参数 (hash路径不适用)
  * @param keys 要删除的 key 的集合
  * @param path 地址，默认为当前地址
  */
@@ -45,7 +47,7 @@ function removeParam(keys: string[], path?: string): string {
 }
 
 /**
- * 添加 查询参数
+ * 添加 查询参数(hash路径不适用)
  * @param params 要添加的键值对
  * @param path 地址，默认为当前地址
  */
@@ -59,7 +61,7 @@ function addParam(params: Record<string, any>, path?: string): string {
 }
 
 /**
- * 更新 查询参数
+ * 更新 查询参数(hash路径不适用)
  * @param params 要添加的键值对
  * @param path 地址，默认为当前地址
  */

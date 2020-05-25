@@ -15,19 +15,19 @@ declare function getUrlParam(key?: string, path?: string): string | Record<strin
 declare function resolve(href: string, path: string): string;
 declare function urlToList(url: string): string[];
 /**
- * 删除 查询参数
+ * 删除 查询参数 (hash路径不适用)
  * @param keys 要删除的 key 的集合
  * @param path 地址，默认为当前地址
  */
 declare function removeParam(keys: string[], path?: string): string;
 /**
- * 添加 查询参数
+ * 添加 查询参数(hash路径不适用)
  * @param params 要添加的键值对
  * @param path 地址，默认为当前地址
  */
 declare function addParam(params: Record<string, any>, path?: string): string;
 /**
- * 更新 查询参数
+ * 更新 查询参数(hash路径不适用)
  * @param params 要添加的键值对
  * @param path 地址，默认为当前地址
  */

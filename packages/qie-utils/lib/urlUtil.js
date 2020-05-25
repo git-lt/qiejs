@@ -6,7 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // https://github.com/unshiftio/url-parse/blob/master/test/test.js
 var url_parse_1 = __importDefault(require("url-parse"));
 function getUrlParam(key, path) {
-    var query = url_parse_1.default(path || window.location.href, true).query;
+    var p = path || window.location.href;
+    p = p.indexOf('#') > -1 ? p.split('#')[1] : p;
+    var query = url_parse_1.default(p, true).query;
     return !!key ? query[key] : query;
 }
 /**
@@ -16,7 +18,7 @@ function getUrlParam(key, path) {
  * @example resolve('http://foo.com/a/', 'b/c') => http://foo.com/a/b/c
  */
 function resolve(href, path) {
-    return url_parse_1.default(path, href).pathname;
+    return url_parse_1.default(path, href).href;
 }
 function urlToList(url) {
     var urllist = url.split('/').filter(function (i) { return i; });
@@ -25,7 +27,7 @@ function urlToList(url) {
     });
 }
 /**
- * 删除 查询参数
+ * 删除 查询参数 (hash路径不适用)
  * @param keys 要删除的 key 的集合
  * @param path 地址，默认为当前地址
  */
@@ -38,7 +40,7 @@ function removeParam(keys, path) {
     return parse.toString();
 }
 /**
- * 添加 查询参数
+ * 添加 查询参数(hash路径不适用)
  * @param params 要添加的键值对
  * @param path 地址，默认为当前地址
  */
@@ -51,7 +53,7 @@ function addParam(params, path) {
     return parse.toString();
 }
 /**
- * 更新 查询参数
+ * 更新 查询参数(hash路径不适用)
  * @param params 要添加的键值对
  * @param path 地址，默认为当前地址
  */
