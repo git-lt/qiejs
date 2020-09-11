@@ -1947,7 +1947,7 @@
     "yargs": "^8.0.2",
     "xtend": "^4.0.2",
     "yauzl": "^2.10.0",
-    "yargs-parser": "^7.0.0",
+    "yargs-parser": "^20.0.0",
     "unset-value": "^1.0.0",
     "yamljs": "^0.2.10"
   }
